@@ -1,5 +1,4 @@
-import Tag from '@/components/Tag';
-import Icons, { type IconKey } from '@/util/icons';
+import { type IconKey } from '@/util/icons';
 import { GraduationCap, Briefcase } from 'lucide-react';
 import Section from '@/components/Section';
 import AnimatedContent from '@/components/AnimatedContent';

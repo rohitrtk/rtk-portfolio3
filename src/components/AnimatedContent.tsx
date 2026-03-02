@@ -6,7 +6,7 @@ type Props = {
   animate?: boolean;
 };
 
-const AnimatedContent = ({ children, animate = true }: Props) => {
+const AnimatedContent = ({ children }: Props) => {
   return (
     <motion.div
       className="max-w-4xl w-full relative z-10 mx-auto"
