@@ -5,6 +5,7 @@ import {
   Input,
   Label,
   Separator,
+  Spinner,
   TextArea,
   TextField,
 } from '@heroui/react';
@@ -23,12 +24,34 @@ const MAX_MESSAGE_LENGTH = 500;
 
 const Contact = () => {
   const [formData, setFormData] = useState(initialFormData);
+  const [sending, setSending] = useState<boolean>(false);
+
+  const sendMessage = async (data: typeof initialFormData) => {
+    try {
+      setSending(true);
+      const res = await fetch('/.netlify/functions/contact', {
+        method: 'POST',
+        body: JSON.stringify(data),
+      });
+      const json = await res.json();
+
+      if (res.status === 200) {
+        console.log('Success!');
+      } else {
+        console.error('Error:', json.message);
+      }
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSending(false);
+      setFormData(initialFormData);
+    }
+  };
 
   const handleSubmit = (e: SyntheticEvent) => {
     e.preventDefault();
-
     console.log('Form submitted:', formData);
-    setFormData(initialFormData);
+    sendMessage(formData);
   };
 
   const handleChange = (
@@ -120,8 +143,12 @@ const Contact = () => {
             </Description>
           </TextField>
 
-          <Button type="submit" variant="primary">
-            <Send size={18} />
+          <Button type="submit" variant="primary" isDisabled={sending}>
+            {sending ? (
+              <Spinner size="sm" className="text-foreground" />
+            ) : (
+              <Send size={20} />
+            )}
             Send
           </Button>
         </Form>

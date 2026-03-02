@@ -48,6 +48,11 @@ export const ThemeProvider = ({ children }: Props) => {
     } else {
       root.classList.remove('dark');
     }
+
+    const favicon = document.getElementById('app-favicon') as HTMLLinkElement;
+    if (favicon) {
+      favicon.href = theme === 'dark' ? '/rk-dark.svg' : '/rk-light.svg';
+    }
   }, [theme]);
 
   const setTheme = (value: Theme) => {
