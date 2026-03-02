@@ -57,6 +57,7 @@ const Navigation = () => {
                 key={id}
                 onClick={() => handleNavItemClick(id)}
                 className="text-md bg-transparent hover:bg-transparent! transition-none! hover:text-emerald-400 hover:dark:text-emerald-border-500"
+                aria-label={text}
               >
                 {text}
               </Button>
@@ -103,6 +104,7 @@ const Navigation = () => {
                     // variant="ghost"
                     className="justify-start hover:text-emerald-400 hover:dark:text-emerald-border-500 cursor-pointer"
                     onClick={() => handleNavItemClick(id)}
+                    aria-label={text}
                   >
                     {text}
                   </div>
@@ -113,6 +115,7 @@ const Navigation = () => {
                 <div
                   onClick={toggleTheme}
                   className="justify-start cursor-pointer bg-transparent hover:bg-transparent! transition-none! hover:text-emerald-400 hover:dark:text-emerald-border-500"
+                  aria-label="Toggle theme"
                 >
                   {isDark ? (
                     <span className="flex items-center gap-2">

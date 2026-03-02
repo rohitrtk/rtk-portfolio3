@@ -42,37 +42,40 @@ const Hero = () => {
           Building performant systems and type-safe APIs for the web.
         </p>
 
-        <div className="flex flex-wrap gap-4 mb-4">
-          <Button onClick={() => scrollToSection('projects')}>
-            <span>View Projects</span>
-            <ArrowRight size={18} />
+        <div className="flex flex-wrap gap-6 mb-6">
+          <Button
+            onClick={() => scrollToSection('projects')}
+            aria-label="View Projects"
+          >
+            View Projects
+            <ArrowRight size={20} />
           </Button>
 
-          <Button onClick={() => scrollToSection('contact')} variant="outline">
+          <Button
+            onClick={() => scrollToSection('contact')}
+            variant="outline"
+            aria-label="Contact"
+          >
             Contact
           </Button>
         </div>
 
-        <div className="flex flex-wrap gap-4">
-          <Button className="bg-transparent! hover:bg-transparent! p-0">
-            <Link
-              href={linkedInProfileUrl}
-              target="_blank"
-              className="text-foreground dark:text-inherit hover:text-emerald-500 no-underline"
-            >
-              <i className={`${linkedInIconClass} text-2xl`} />
-            </Link>
-          </Button>
+        <div className="flex flex-wrap gap-6">
+          <Link
+            href={linkedInProfileUrl}
+            target="_blank"
+            className="text-foreground dark:text-inherit hover:text-emerald-500! no-underline"
+          >
+            <i className={`${linkedInIconClass} text-3xl`} />
+          </Link>
 
-          <Button className="bg-transparent! hover:bg-transparent! p-0">
-            <Link
-              href={githubProfileUrl}
-              target="_blank"
-              className="text-foreground dark:text-inherit hover:text-emerald-500 no-underline"
-            >
-              <i className={`${githubIconClass} text-2xl`} />
-            </Link>
-          </Button>
+          <Link
+            href={githubProfileUrl}
+            target="_blank"
+            className="text-foreground dark:text-inherit hover:text-emerald-500! no-underline"
+          >
+            <i className={`${githubIconClass} text-3xl`} />
+          </Link>
         </div>
       </AnimatedContent>
     </Section>
