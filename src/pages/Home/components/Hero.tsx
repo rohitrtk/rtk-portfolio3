@@ -1,9 +1,16 @@
 import { useTheme } from '@/context/ThemeProvider';
-import { Button } from '@heroui/react';
+import { Button, Link } from '@heroui/react';
 import { ArrowRight } from 'lucide-react';
 import { scrollToSection } from '@/util';
 import Section from '@/components/Section';
 import AnimatedContent from '@/components/AnimatedContent';
+import Icons from '@/util/icons';
+
+const linkedInIconClass = Icons['linkedin-colourless'].iconClass;
+const githubIconClass = Icons['github-colourless'].iconClass;
+
+const linkedInProfileUrl = 'https://www.linkedin.com/in/rohit-kisto/';
+const githubProfileUrl = 'https://github.com/rohitrtk';
 
 const Hero = () => {
   const { isDark } = useTheme();
@@ -18,12 +25,6 @@ const Hero = () => {
         }}
       />
 
-      {/* <div
-        className="absolute inset-0"
-        style={{
-          background: `radial-gradient(circle at center, transparent 0%, ${isDark ? '#0F1115' : '#FAFAF9'} 70%)`,
-        }}
-      /> */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 bg-emerald-400 dark:bg-emerald-500" />
 
       <AnimatedContent>
@@ -41,7 +42,7 @@ const Hero = () => {
           Building performant systems and type-safe APIs for the web.
         </p>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 mb-4">
           <Button onClick={() => scrollToSection('projects')}>
             <span>View Projects</span>
             <ArrowRight size={18} />
@@ -49,6 +50,28 @@ const Hero = () => {
 
           <Button onClick={() => scrollToSection('contact')} variant="outline">
             Contact
+          </Button>
+        </div>
+
+        <div className="flex flex-wrap gap-4">
+          <Button className="bg-transparent! hover:bg-transparent! p-0">
+            <Link
+              href={linkedInProfileUrl}
+              target="_blank"
+              className="text-foreground dark:text-inherit hover:text-emerald-500 no-underline"
+            >
+              <i className={`${linkedInIconClass} text-2xl`} />
+            </Link>
+          </Button>
+
+          <Button className="bg-transparent! hover:bg-transparent! p-0">
+            <Link
+              href={githubProfileUrl}
+              target="_blank"
+              className="text-foreground dark:text-inherit hover:text-emerald-500 no-underline"
+            >
+              <i className={`${githubIconClass} text-2xl`} />
+            </Link>
           </Button>
         </div>
       </AnimatedContent>

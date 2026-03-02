@@ -4,6 +4,7 @@ import {
   Form,
   Input,
   Label,
+  Separator,
   TextArea,
   TextField,
 } from '@heroui/react';
@@ -17,6 +18,8 @@ const initialFormData = {
   email: '',
   message: '',
 };
+
+const MAX_MESSAGE_LENGTH = 500;
 
 const Contact = () => {
   const [formData, setFormData] = useState(initialFormData);
@@ -46,7 +49,7 @@ const Contact = () => {
         <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">
           Get in Touch
         </h2>
-        <div className="h-px mb-16 bg-muted" />
+        <Separator className="mb-16" />
 
         <p className="text-lg mb-12 leading-relaxed">
           Have a question or just something to say? Send me a message and I'll
@@ -73,6 +76,7 @@ const Contact = () => {
               required
               placeholder="Your name..."
               variant="primary"
+              className="placeholder:text-muted-foreground/50"
             />
           </TextField>
 
@@ -88,6 +92,7 @@ const Contact = () => {
               required
               placeholder="Your email..."
               variant="primary"
+              className="placeholder:text-muted-foreground/50"
             />
           </TextField>
 
@@ -104,11 +109,14 @@ const Contact = () => {
               onChange={handleChange}
               aria-describedby="textarea-controlled-description"
               aria-label="Message"
-              className="resize-none"
-              maxLength={200}
+              className="resize-none placeholder:text-muted-foreground/50"
+              maxLength={MAX_MESSAGE_LENGTH}
             />
-            <Description id="textarea-controlled-description">
-              Characters: {formData.message.length} / 200
+            <Description
+              id="textarea-controlled-description"
+              className="text-muted-foreground/50"
+            >
+              Characters: {formData.message.length} / {MAX_MESSAGE_LENGTH}
             </Description>
           </TextField>
 

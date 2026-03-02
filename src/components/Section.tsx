@@ -10,7 +10,7 @@ const Section = ({ children, id, verticalPadding = true }: Props) => {
   return (
     <section
       id={id}
-      className={`min-h-screen flex items-center justify-center px-6 relative ${verticalPadding ? 'py-32' : ''}`}
+      className={`min-h-screen flex items-center justify-center px-6 relative overflow-x-hidden ${verticalPadding ? 'py-32' : ''}`}
     >
       {children}
     </section>

@@ -153,6 +153,26 @@ export const icons = {
     name: 'Tauri',
     iconClass: 'devicon-tauri-plain colored',
   },
+  linkedin: {
+    id: 'linkedin',
+    name: 'LinkedIn',
+    iconClass: 'devicon-linkedin-plain colored',
+  },
+  'linkedin-colourless': {
+    id: 'linkedin-colourless',
+    name: 'LinkedIn',
+    iconClass: 'devicon-linkedin-plain',
+  },
+  github: {
+    id: 'github',
+    name: 'Github',
+    iconClass: 'devicon-github-original colored',
+  },
+  'github-colourless': {
+    id: 'github-colourless',
+    name: 'Github',
+    iconClass: 'devicon-github-original',
+  },
 } as const;
 
 export type IconKey = keyof typeof icons;

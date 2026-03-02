@@ -3,6 +3,8 @@ import Icons, { type IconKey } from '@/util/icons';
 import { GraduationCap, Briefcase } from 'lucide-react';
 import Section from '@/components/Section';
 import AnimatedContent from '@/components/AnimatedContent';
+import Tags from '@/components/Tags';
+import { Separator } from '@heroui/react';
 
 type Experience = {
   type: 'education' | 'employment';
@@ -80,7 +82,7 @@ const Journey = () => {
         <h2 className="text-4xl md-text-5xl mb-4 tracking-tight">
           Professional Journey
         </h2>
-        <div className="h-px mb-16 bg-muted" />
+        <Separator className="mb-16" />
 
         <div className="space-y-16">
           {experiences.map((exp, index) => (
@@ -112,7 +114,12 @@ const Journey = () => {
                     {exp.description}
                   </p>
 
-                  <div className="flex flex-wrap gap-2">
+                  {exp.tags && (
+                    <div className="mt-auto">
+                      <Tags tags={exp.tags} />
+                    </div>
+                  )}
+                  {/* <div className="flex flex-wrap gap-2">
                     {exp.tags?.map((tag) => {
                       const { id, name, iconClass } = Icons[tag];
                       return (
@@ -123,7 +130,7 @@ const Journey = () => {
                         />
                       );
                     })}
-                  </div>
+                  </div> */}
                 </div>
               </div>
 

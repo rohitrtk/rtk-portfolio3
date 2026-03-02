@@ -2,6 +2,7 @@ import Tag from '@/components/Tag';
 import Icons, { type IconKey } from '@/util/icons';
 import Section from '@/components/Section';
 import AnimatedContent from '@/components/AnimatedContent';
+import { Separator } from '@heroui/react';
 
 const coreSkills: IconKey[] = [
   'react',
@@ -23,7 +24,7 @@ const About = () => {
 
       <AnimatedContent>
         <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">About</h2>
-        <div className="h-px mb-16 bg-muted" />
+        <Separator className="mb-16" />
 
         <div className="space-y-6">
           <p className="text-lg leading-relaxed">

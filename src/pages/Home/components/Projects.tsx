@@ -1,8 +1,9 @@
-import { ExternalLink } from 'lucide-react';
-import Tag from '@/components/Tag';
-import Icons, { type IconKey } from '@/util/icons';
+import { LockIcon } from 'lucide-react';
+import { type IconKey } from '@/util/icons';
 import Section from '@/components/Section';
 import AnimatedContent from '@/components/AnimatedContent';
+import Tags from '@/components/Tags';
+import { Link, Separator } from '@heroui/react';
 
 type Project = {
   title: string;
@@ -22,7 +23,7 @@ const projects: Project[] = [
   {
     title: 'Kisto Coin',
     description:
-      'To learn more about Blockchain, I created a simple Proof-of-Work blockchain written in TypeScript.',
+      'To learn more about Blockchain, I created a barebones Proof-of-Work blockchain written in TypeScript.',
     tags: ['typescript'],
     link: '#',
   },
@@ -57,34 +58,30 @@ const Projects = () => {
 
       <AnimatedContent>
         <h2 className="text-4xl md-text-5xl mb-4 tracking-tight">Projects</h2>
-        <div className="h-px mb-16 bg-muted" />
+        <Separator className="mb-16" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {projects.map((project) => (
             <div
               key={project.title}
-              className="p-8 rounded-lg border transition-all bg-card border-muted hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5"
+              className="p-8 rounded-lg border transition-all bg-card border-muted hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5 flex flex-col"
             >
-              <div className="flex items-start justify-between mb-3">
-                <h3 className="text-xl tracking-tight">{project.title}</h3>
-                {project.link && <ExternalLink size={18} />}
+              <div>
+                <div className="flex items-start justify-between mb-3">
+                  <h3 className="text-xl tracking-tight">{project.title}</h3>
+                  <Link isDisabled={true} href="#" target="_blank">
+                    <LockIcon size={20} />
+                    {/* {project.link && <ExternalLink size={20} />} */}
+                  </Link>
+                </div>
+
+                <p className="mb-6 leading-relaxed text-muted-foreground">
+                  {project.description}
+                </p>
               </div>
 
-              <p className="mb-6 leading-relaxed text-muted-foreground">
-                {project.description}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => {
-                  const { id, name, iconClass } = Icons[tag];
-
-                  return (
-                    <Tag
-                      key={`${project.title}-${id}`}
-                      name={name}
-                      icon={iconClass}
-                    />
-                  );
-                })}
+              <div className="mt-auto">
+                <Tags tags={project.tags} />
               </div>
             </div>
           ))}
