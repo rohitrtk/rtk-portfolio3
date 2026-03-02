@@ -9,6 +9,8 @@ import {
 } from '@heroui/react';
 import { Send } from 'lucide-react';
 import { useState, type ChangeEvent, type SyntheticEvent } from 'react';
+import Section from '@/components/Section';
+import AnimatedContent from '@/components/AnimatedContent';
 
 const initialFormData = {
   name: '',
@@ -36,11 +38,11 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="min-h-screen py-32 px-6 relative">
+    <Section id="contact">
       <div className="absolute top-0 right-0 w-96 h-96 blur-3xl opacity-10 bg-purple-400 dark:bg-purple-500" />
       <div className="absolute bottom-0 left-1/3 w-[600px] h-48 blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <AnimatedContent>
         <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">
           Get in Touch
         </h2>
@@ -53,7 +55,7 @@ const Contact = () => {
 
         <Form
           onSubmit={handleSubmit}
-          className="space-y-6 flex flex-col items-center"
+          className="space-y-6 flex flex-col"
           onInvalid={(e) => {
             e.preventDefault();
             console.log(e);
@@ -115,8 +117,8 @@ const Contact = () => {
             Send
           </Button>
         </Form>
-      </div>
-    </section>
+      </AnimatedContent>
+    </Section>
   );
 };
 

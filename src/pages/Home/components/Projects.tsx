@@ -1,6 +1,8 @@
 import { ExternalLink } from 'lucide-react';
-import Tag from '../../../components/Tag';
+import Tag from '@/components/Tag';
 import Icons, { type IconKey } from '@/util/icons';
+import Section from '@/components/Section';
+import AnimatedContent from '@/components/AnimatedContent';
 
 type Project = {
   title: string;
@@ -49,14 +51,11 @@ const projects: Project[] = [
 
 const Projects = () => {
   return (
-    <section
-      id="projects"
-      className="min-h-screen py-32 px-6 relative overflow-hidden"
-    >
+    <Section id="projects">
       <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500" />
       <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <AnimatedContent>
         <h2 className="text-4xl md-text-5xl mb-4 tracking-tight">Projects</h2>
         <div className="h-px mb-16 bg-muted" />
 
@@ -90,8 +89,8 @@ const Projects = () => {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </AnimatedContent>
+    </Section>
   );
 };
 

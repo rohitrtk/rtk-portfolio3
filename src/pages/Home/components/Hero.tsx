@@ -2,12 +2,14 @@ import { useTheme } from '@/context/ThemeProvider';
 import { Button } from '@heroui/react';
 import { ArrowRight } from 'lucide-react';
 import { scrollToSection } from '@/util';
+import Section from '@/components/Section';
+import AnimatedContent from '@/components/AnimatedContent';
 
 const Hero = () => {
   const { isDark } = useTheme();
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-6 relative overflow-hidden">
+    <Section id="hero" verticalPadding={false}>
       <div
         className="absolute inset-0 opacity-[0.02]"
         style={{
@@ -24,7 +26,7 @@ const Hero = () => {
       /> */}
       <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 bg-emerald-400 dark:bg-emerald-500" />
 
-      <div className="max-w-4xl w-full relative z-10 mx-auto">
+      <AnimatedContent>
         <div className="inline-block px-4 py-2 rounded-full border mb-8 bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-500/10 dark:border-emerald-500/20 dark:text-emerald-400">
           <span className="text-sm tracking-wide">
             Full-Stack Software Developer
@@ -49,8 +51,8 @@ const Hero = () => {
             Contact
           </Button>
         </div>
-      </div>
-    </section>
+      </AnimatedContent>
+    </Section>
   );
 };
 

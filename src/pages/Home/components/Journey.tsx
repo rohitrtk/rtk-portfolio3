@@ -1,6 +1,8 @@
 import Tag from '@/components/Tag';
 import Icons, { type IconKey } from '@/util/icons';
 import { GraduationCap, Briefcase } from 'lucide-react';
+import Section from '@/components/Section';
+import AnimatedContent from '@/components/AnimatedContent';
 
 type Experience = {
   type: 'education' | 'employment';
@@ -69,12 +71,12 @@ const experiences: Experience[] = [
 
 const Journey = () => {
   return (
-    <section id="journey" className="min-h-screen py-32 px-6 relative">
+    <Section id="journey">
       <div className="absolute top-0 right-1/4 w-[600px] h-64 blur-3xl opacity-10 rotate-12 bg-purple-400 dark:bg-purple-500" />
       <div className="absolute bottom-1/3 left-1/4 w-[400px] h-96 blur-3xl opacity-10 -rotate-12 bg-emerald-400 dark:bg-emerald-500" />
       <div className="absolute left-1/2 top-64 bottom-32 w-px hidden lg:block z-0 bg-emerald-500/20" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
+      <AnimatedContent>
         <h2 className="text-4xl md-text-5xl mb-4 tracking-tight">
           Professional Journey
         </h2>
@@ -131,8 +133,8 @@ const Journey = () => {
             </div>
           ))}
         </div>
-      </div>
-    </section>
+      </AnimatedContent>
+    </Section>
   );
 };
 

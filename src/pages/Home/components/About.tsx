@@ -1,5 +1,7 @@
 import Tag from '@/components/Tag';
 import Icons, { type IconKey } from '@/util/icons';
+import Section from '@/components/Section';
+import AnimatedContent from '@/components/AnimatedContent';
 
 const coreSkills: IconKey[] = [
   'react',
@@ -15,12 +17,12 @@ const coreSkills: IconKey[] = [
 
 const About = () => {
   return (
-    <section id="about" className="min-h-screen py-32 px-6 relative">
+    <Section id="about">
       <div className="absolute top-1/3 left-1/3 w-[700px] h-32 blur-3xl opacity-10 -rotate-45 bg-cyan-400 dark:bg-cyan-500" />
       <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] blur-3xl opacity-10 -rotate-45 bg-emeraldyan-400 dark:bg-emerald-500" />
 
-      <div className="max-w-4xl mx-auto relative z-10">
-        <h2 className="text-4x; md:text-5xl mb-4 tracking-tight">About</h2>
+      <AnimatedContent>
+        <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">About</h2>
         <div className="h-px mb-16 bg-muted" />
 
         <div className="space-y-6">
@@ -49,8 +51,8 @@ const About = () => {
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </AnimatedContent>
+    </Section>
   );
 };
 
