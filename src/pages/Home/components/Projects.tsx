@@ -16,15 +16,15 @@ const projects: Project[] = [
   {
     title: 'SQL Release Note Tool',
     description:
-      'Written as part of a yearly competition at Kenna, I and two colleagues created this windowed application to assist in creating release notes which are used to move SQL code throughout our various deployment environments.',
+      'Written as part of a yearly competition at Kenna, myself and two colleagues created a windowed application to assist in creating release notes which are used to move SQL code throughout our various deployment environments.',
     tags: ['tauri', 'rust', 'react', 'tailwind', 'mssql'],
     link: '#',
   },
   {
     title: 'Kisto Coin',
     description:
-      'To learn more about Blockchain, I created a barebones Proof-of-Work blockchain written in TypeScript.',
-    tags: ['typescript'],
+      "To learn more about Blockchain, I created a barebones, account based Proof-of-Work blockchain that allows users to create wallets and send Kisto Coin's to one another.",
+    tags: ['react', 'tailwind', 'java', 'spring'],
     link: '#',
   },
   {
