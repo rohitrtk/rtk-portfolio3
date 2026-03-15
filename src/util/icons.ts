@@ -119,6 +119,11 @@ export const icons = {
     name: 'MongoDB',
     iconClass: 'devicon-mongodb-plain colored',
   },
+  prisma: {
+    id: 'prisma',
+    name: 'Prisma',
+    iconClass: 'devicon-prisma-original colored',
+  },
 
   // Cloud / DevOps
   azure: {
@@ -172,6 +177,11 @@ export const icons = {
     id: 'github-colourless',
     name: 'Github',
     iconClass: 'devicon-github-original',
+  },
+  hardhat: {
+    id: 'hardhat',
+    name: 'Hardhat',
+    iconClass: 'devicon-hardhat-plain colored',
   },
 } as const;
 

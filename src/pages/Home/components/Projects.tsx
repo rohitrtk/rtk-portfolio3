@@ -14,17 +14,32 @@ type Project = {
 
 const projects: Project[] = [
   {
-    title: 'SQL Release Note Tool',
+    title: 'FiLearn',
     description:
-      'Written as part of a yearly competition at Kenna, myself and two colleagues created a windowed application to assist in creating release notes which are used to move SQL code throughout our various deployment environments.',
-    tags: ['tauri', 'rust', 'react', 'tailwind', 'mssql'],
+      'An online learning platform for finance and crypto. For completing quizzes, users are rewarded with crypto on Ethereums test net.',
+    tags: [
+      'nextjs',
+      'typescript',
+      'tailwind',
+      'prisma',
+      'postgresql',
+      'hardhat',
+    ],
     link: '#',
   },
   {
     title: 'Kisto Coin',
     description:
       "To learn more about Blockchain, I created a barebones, account based Proof-of-Work blockchain that allows users to create wallets and send Kisto Coin's to one another.",
-    tags: ['react', 'tailwind', 'java', 'spring'],
+    tags: ['react', 'typescript', 'tailwind', 'java', 'spring'],
+    link: '#',
+  },
+
+  {
+    title: 'SQL Release Note Tool',
+    description:
+      'Written as part of a yearly competition at Kenna, myself and two colleagues created a windowed application to assist in creating release notes which are used to move SQL code throughout our various deployment environments.',
+    tags: ['tauri', 'rust', 'react', 'typescript', 'tailwind', 'mssql'],
     link: '#',
   },
   {
@@ -38,7 +53,7 @@ const projects: Project[] = [
     title: 'Instagram 4 Pomeranians',
     description:
       'An Instagram clone with a twist. Users can only upload pictures of my favourite dog breed - The Pomeranian. This is enforced via image recognition.',
-    tags: ['react', 'mongodb', 'node', 'express'],
+    tags: ['react', 'typescript', 'mongodb', 'node', 'express'],
     link: '#',
   },
   {
@@ -54,7 +69,7 @@ const Projects = () => {
   return (
     <Section id="projects">
       <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500" />
-      <div className="absolute bottom-1/4 right-0 w-[500px] h-[500px] rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500" />
+      <div className="absolute bottom-1/4 right-0 w-125 h-125 rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500" />
 
       <AnimatedContent>
         <h2 className="text-4xl md-text-5xl mb-4 tracking-tight">Projects</h2>

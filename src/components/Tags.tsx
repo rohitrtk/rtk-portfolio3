@@ -25,20 +25,28 @@ const Tags = ({ tags }: Props) => {
         />
         See Skills
       </div>
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.15 }}
-            className="mt-2 flex flex-wrap gap-2"
+            initial={{ height: 0 }}
+            animate={{ height: 'auto' }}
+            exit={{ height: 0 }}
+            transition={{ duration: 0.22, ease: 'easeInOut' }}
+            className="overflow-hidden"
           >
-            {tags.map((tag) => {
-              const { id, name, iconClass } = Icons[tag];
+            <motion.div
+              initial={{ opacity: 0, y: -4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
+              className="mt-2 flex flex-wrap gap-2"
+            >
+              {tags.map((tag) => {
+                const { id, name, iconClass } = Icons[tag];
 
-              return <Tag key={id} name={name} icon={iconClass} />;
-            })}
+                return <Tag key={id} name={name} icon={iconClass} />;
+              })}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
