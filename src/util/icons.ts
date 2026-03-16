@@ -97,6 +97,11 @@ export const icons = {
     name: 'C#',
     iconClass: 'devicon-csharp-plain colored',
   },
+  solidity: {
+    id: 'solidity',
+    name: 'Solidity',
+    iconClass: 'devicon-solidity-plain colored',
+  },
 
   // Databases
   postgresql: {

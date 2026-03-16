@@ -1,4 +1,4 @@
-import { LockIcon } from 'lucide-react';
+import { ExternalLink, LockIcon } from 'lucide-react';
 import { type IconKey } from '@/util/icons';
 import Section from '@/components/Section';
 import AnimatedContent from '@/components/AnimatedContent';
@@ -10,29 +10,23 @@ type Project = {
   description: string;
   tags: IconKey[];
   link?: string;
+  proprietary?: boolean;
 };
 
 const projects: Project[] = [
   {
     title: 'FiLearn',
     description:
-      'An online learning platform for finance and crypto. For completing quizzes, users are rewarded with crypto on Ethereums test net.',
-    tags: [
-      'nextjs',
-      'typescript',
-      'tailwind',
-      'prisma',
-      'postgresql',
-      'hardhat',
-    ],
-    link: '#',
+      'An online learning platform for finance and crypto. Completing quizzes rewards the user with FILEARN tokens.',
+    tags: ['nextjs', 'typescript', 'solidity', 'tailwind', 'prisma', 'hardhat'],
+    link: 'https://github.com/rohitrtk/fi-learn',
   },
   {
     title: 'Kisto Coin',
     description:
       "To learn more about Blockchain, I created a barebones, account based Proof-of-Work blockchain that allows users to create wallets and send Kisto Coin's to one another.",
     tags: ['react', 'typescript', 'tailwind', 'java', 'spring'],
-    link: '#',
+    link: 'https://github.com/rohitrtk/kisto-coin',
   },
 
   {
@@ -40,28 +34,28 @@ const projects: Project[] = [
     description:
       'Written as part of a yearly competition at Kenna, myself and two colleagues created a windowed application to assist in creating release notes which are used to move SQL code throughout our various deployment environments.',
     tags: ['tauri', 'rust', 'react', 'typescript', 'tailwind', 'mssql'],
-    link: '#',
+    proprietary: true,
   },
   {
     title: 'Kill Task Utility',
     description:
       'Working with multiple running Express instances, occasionally results in the message "This port is in use". Through the terminal, calling this utility program lets me terminate all programs running on a list of ports.',
     tags: ['rust'],
-    link: '#',
+    link: 'https://github.com/rohitrtk/killtask2',
   },
   {
     title: 'Instagram 4 Pomeranians',
     description:
       'An Instagram clone with a twist. Users can only upload pictures of my favourite dog breed - The Pomeranian. This is enforced via image recognition.',
     tags: ['react', 'typescript', 'mongodb', 'node', 'express'],
-    link: '#',
+    link: 'https://github.com/rohitrtk/pomstagram',
   },
   {
     title: 'Student Registration Form',
     description:
       "Created during my co-op placement at Six Nations Polytechnic. This was designed to be a drop in replacement for OUAC (Ontario Universities' Applcation Centre) allowing for a more streamlined student application process.",
     tags: ['javascript', 'jquery', 'bootstrap', 'php', 'mysql'],
-    link: '#',
+    proprietary: true,
   },
 ];
 
@@ -84,9 +78,18 @@ const Projects = () => {
               <div>
                 <div className="flex items-start justify-between mb-3">
                   <h3 className="text-xl tracking-tight">{project.title}</h3>
-                  <Link isDisabled={true} href="#" target="_blank">
-                    <LockIcon size={20} />
-                    {/* {project.link && <ExternalLink size={20} />} */}
+                  <Link
+                    isDisabled={project.proprietary || false}
+                    href={
+                      project.link && !project.proprietary ? project.link : '#'
+                    }
+                    target="_blank"
+                  >
+                    {project.proprietary ? (
+                      <LockIcon size={20} />
+                    ) : (
+                      project.link && <ExternalLink size={20} />
+                    )}
                   </Link>
                 </div>
 
