@@ -1,9 +1,9 @@
-import { useTheme } from '@/context/ThemeProvider';
-import { Button, Link } from '@heroui/react';
-import { ArrowRight } from 'lucide-react';
+import { useTheme } from '@/context/theme-provider';
+import { Button } from '@/components/ui/button';
+import { ArrowRight, Contact } from 'lucide-react';
 import { scrollToSection } from '@/util';
-import Section from '@/components/Section';
-import AnimatedContent from '@/components/AnimatedContent';
+import Section from '@/components/section';
+import AnimatedContent from '@/components/animated-content';
 import Icons from '@/util/icons';
 
 const linkedInIconClass = Icons['linkedin-colourless'].iconClass;
@@ -42,40 +42,65 @@ const Hero = () => {
           Building performant systems and type-safe APIs for the web.
         </p>
 
-        <div className="flex flex-wrap gap-6 mb-6">
+        <div className="mb-6 flex flex-wrap gap-6">
           <Button
+            type="button"
+            size="responsive"
             onClick={() => scrollToSection('projects')}
-            aria-label="View Projects"
+            aria-label="View projects"
+            className="flex gap-1 w-full sm:w-auto"
           >
             View Projects
-            <ArrowRight size={20} />
+            <ArrowRight data-icon="inline-end" size={20} />
           </Button>
 
           <Button
+            type="button"
+            size="responsive"
             onClick={() => scrollToSection('contact')}
             variant="outline"
             aria-label="Contact"
+            className="flex gap-1 w-full sm:w-auto"
           >
             Contact
+            <Contact data-icon="inline-end" size={20} />
           </Button>
         </div>
 
-        <div className="flex flex-wrap gap-6">
-          <Link
-            href={linkedInProfileUrl}
-            target="_blank"
-            className="text-foreground dark:text-inherit hover:text-emerald-500! no-underline"
+        <div className="flex items-center gap-3">
+          <Button
+            asChild
+            variant="outline"
+            size="icon-responsive"
+            className="hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
           >
-            <i className={`${linkedInIconClass} text-3xl`} />
-          </Link>
+            <a
+              href={linkedInProfileUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View Rohit Kisto on LinkedIn"
+              title="LinkedIn"
+            >
+              <i className={`${linkedInIconClass} text-2xl`} />
+            </a>
+          </Button>
 
-          <Link
-            href={githubProfileUrl}
-            target="_blank"
-            className="text-foreground dark:text-inherit hover:text-emerald-500! no-underline"
+          <Button
+            asChild
+            variant="outline"
+            size="icon-responsive"
+            className="hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
           >
-            <i className={`${githubIconClass} text-3xl`} />
-          </Link>
+            <a
+              href={githubProfileUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="View Rohit Kisto on GitHub"
+              title="GitHub"
+            >
+              <i className={`${githubIconClass} text-2xl`} />
+            </a>
+          </Button>
         </div>
       </AnimatedContent>
     </Section>

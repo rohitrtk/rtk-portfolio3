@@ -1,11 +1,13 @@
+import { Button } from '@/components/ui/button';
 import { scrollToSection } from '@/util';
-import { Button } from '@heroui/react';
 
 const Logo = () => {
   return (
     <Button
+      type="button"
+      variant="ghost"
       onClick={() => scrollToSection('hero')}
-      className="text-xl tracking-tight cursor-pointer bg-transparent hover:bg-transparent! hover:text-emerald-400 hover:dark:text-emerald-border-500"
+      className="text-xl tracking-tight hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
     >
       rohitkisto.dev
     </Button>

@@ -1,10 +1,11 @@
-import { useState, useEffect, useRef } from 'react';
-import { useTheme } from '@/context/ThemeProvider';
-import { Button, Separator } from '@heroui/react';
+import { useEffect, useRef, useState } from 'react';
+import { useTheme } from '@/context/theme-provider';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 import { Menu, Moon, Sun, X } from 'lucide-react';
 import { scrollToSection } from '@/util';
 import { AnimatePresence, motion } from 'motion/react';
-import Logo from '@/components/Logo';
+import Logo from '@/components/logo';
 
 const items = [
   { id: 'projects', text: 'Projects' },
@@ -51,21 +52,28 @@ const Navigation = () => {
         <div className="max-w-4xl mx-auto px-6 py-4 hidden md:flex items-center justify-between">
           <Logo />
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-1">
             {items.map(({ id, text }) => (
               <Button
                 key={id}
+                type="button"
+                variant="ghost"
                 onClick={() => handleNavItemClick(id)}
-                className="text-md bg-transparent hover:bg-transparent! transition-none! hover:text-emerald-400 hover:dark:text-emerald-border-500"
-                aria-label={text}
+                className="text-base hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
               >
                 {text}
               </Button>
             ))}
+
             <Button
+              type="button"
+              variant="ghost"
+              size="icon"
               onClick={toggleTheme}
-              className="p-2 bg-transparent hover:bg-transparent! transition-none! hover:text-emerald-400 hover:dark:text-emerald-border-500"
-              aria-label="Toggle theme"
+              className="hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+              aria-label={
+                isDark ? 'Switch to light mode' : 'Switch to dark mode'
+              }
             >
               {isDark ? <Sun size={20} /> : <Moon size={20} />}
             </Button>
@@ -79,10 +87,13 @@ const Navigation = () => {
           <Logo />
 
           <Button
-            onClick={() => setOpen((prev) => !prev)}
+            type="button"
             variant="ghost"
-            className="p-2 bg-transparent hover:bg-transparent! transition-none! hover:text-emerald-400 hover:dark:text-emerald-border-500"
-            aria-label="Toggle navigation menu"
+            size="icon"
+            onClick={() => setOpen((previous) => !previous)}
+            className="hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
+            aria-expanded={open}
           >
             {open ? <X size={20} /> : <Menu size={20} />}
           </Button>
@@ -99,34 +110,37 @@ const Navigation = () => {
             >
               <div className="flex flex-col px-6 py-4 gap-4">
                 {items.map(({ id, text }) => (
-                  <div
+                  <Button
                     key={id}
-                    // variant="ghost"
-                    className="justify-start hover:text-emerald-400 hover:dark:text-emerald-border-500 cursor-pointer"
+                    type="button"
+                    variant="ghost"
+                    className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
                     onClick={() => handleNavItemClick(id)}
-                    aria-label={text}
                   >
                     {text}
-                  </div>
+                  </Button>
                 ))}
 
                 <Separator />
 
-                <div
+                <Button
+                  type="button"
+                  variant="ghost"
+                  className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
                   onClick={toggleTheme}
-                  className="justify-start cursor-pointer bg-transparent hover:bg-transparent! transition-none! hover:text-emerald-400 hover:dark:text-emerald-border-500"
-                  aria-label="Toggle theme"
                 >
                   {isDark ? (
-                    <span className="flex items-center gap-2">
-                      Light Mode <Sun size={20} />
-                    </span>
+                    <>
+                      Light Mode
+                      <Sun data-icon="inline-end" size={20} />
+                    </>
                   ) : (
-                    <span className="flex items-center gap-2">
-                      Dark Mode <Moon size={20} />
-                    </span>
+                    <>
+                      Dark Mode
+                      <Moon data-icon="inline-end" size={20} />
+                    </>
                   )}
-                </div>
+                </Button>
               </div>
             </motion.div>
           )}
