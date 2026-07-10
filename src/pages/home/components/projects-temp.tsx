@@ -1,9 +1,10 @@
 import { ExternalLink, LockIcon } from 'lucide-react';
 import { type IconKey } from '@/util/icons';
-import Section from '@/components/Section';
-import AnimatedContent from '@/components/AnimatedContent';
-import Tags from '@/components/Tags';
-import { Link, Separator } from '@heroui/react';
+import Section from '@/components/section';
+import AnimatedContent from '@/components/animated-content';
+import Tags from '@/components/tags';
+import { Button } from '@/components/ui/button';
+import { Separator } from '@/components/ui/separator';
 
 type Project = {
   title: string;
@@ -66,7 +67,7 @@ const Projects = () => {
       <div className="absolute bottom-1/4 right-0 w-125 h-125 rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500" />
 
       <AnimatedContent>
-        <h2 className="text-4xl md-text-5xl mb-4 tracking-tight">Projects</h2>
+        <h2 className="mb-4 text-4xl tracking-tight md:text-5xl">Projects</h2>
         <Separator className="mb-16" />
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -76,21 +77,31 @@ const Projects = () => {
               className="p-8 rounded-lg border transition-all bg-card border-muted hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5 flex flex-col"
             >
               <div>
-                <div className="flex items-start justify-between mb-3">
+                <div className="flex items-start justify-between gap-4">
                   <h3 className="text-xl tracking-tight">{project.title}</h3>
-                  <Link
-                    isDisabled={project.proprietary || false}
-                    href={
-                      project.link && !project.proprietary ? project.link : '#'
-                    }
-                    target="_blank"
-                  >
-                    {project.proprietary ? (
+
+                  {project.proprietary ? (
+                    <span
+                      className="text-muted-foreground"
+                      title="This project is proprietary"
+                      aria-label="Proprietary project"
+                    >
                       <LockIcon size={20} />
-                    ) : (
-                      project.link && <ExternalLink size={20} />
-                    )}
-                  </Link>
+                    </span>
+                  ) : (
+                    project.link && (
+                      <Button asChild variant="ghost" size="icon">
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          aria-label={`Open ${project.title}`}
+                        >
+                          <ExternalLink size={20} />
+                        </a>
+                      </Button>
+                    )
+                  )}
                 </div>
 
                 <p className="mb-6 leading-relaxed text-muted-foreground">

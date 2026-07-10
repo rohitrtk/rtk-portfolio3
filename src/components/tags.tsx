@@ -2,7 +2,7 @@ import Icons, { type IconKey } from '@/util/icons';
 import { ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import Tag from './Tag';
+import Tag from './tag';
 
 type Props = {
   tags: IconKey[];
@@ -15,16 +15,18 @@ const Tags = ({ tags }: Props) => {
 
   return (
     <div>
-      <div
+      <button
+        type="button"
         onClick={toggleOpen}
-        className="flex items-center tracking-tight text-muted-foreground cursor-pointer"
+        aria-expanded={open}
+        className="flex items-center tracking-tight text-muted-foreground transition-colors hover:text-foreground"
       >
         <ChevronRight
           size={20}
-          className={`transition-all ${open ? 'rotate-90' : 'rotate-0'}`}
+          className={`transition-transform ${open ? 'rotate-90' : 'rotate-0'}`}
         />
         See Skills
-      </div>
+      </button>
       <AnimatePresence initial={false}>
         {open && (
           <motion.div
