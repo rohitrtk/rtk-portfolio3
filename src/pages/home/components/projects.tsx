@@ -1,13 +1,10 @@
 import { ExternalLink, LockIcon } from 'lucide-react';
-import { type IconKey } from '@/util/icons';
 import Section from '@/components/section';
 import AnimatedContent from '@/components/animated-content';
 import Tags from '@/components/tags';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import ProjectGallery, {
-  type ProjectImage,
-} from '@/components/project-gallery';
+import ProjectGallery from '@/components/project-gallery';
 import { projects } from '@/data/projects';
 
 const Projects = () => {
