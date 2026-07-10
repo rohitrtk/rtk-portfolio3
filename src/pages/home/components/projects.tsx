@@ -1,64 +1,11 @@
 import { ExternalLink, LockIcon } from 'lucide-react';
-import { type IconKey } from '@/util/icons';
 import Section from '@/components/section';
 import AnimatedContent from '@/components/animated-content';
 import Tags from '@/components/tags';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-
-type Project = {
-  title: string;
-  description: string;
-  tags: IconKey[];
-  link?: string;
-  proprietary?: boolean;
-};
-
-const projects: Project[] = [
-  {
-    title: 'FiLearn',
-    description:
-      'An online learning platform for finance and crypto. Completing quizzes rewards the user with FILEARN tokens.',
-    tags: ['nextjs', 'typescript', 'solidity', 'tailwind', 'prisma', 'hardhat'],
-    link: 'https://github.com/rohitrtk/fi-learn',
-  },
-  {
-    title: 'Kisto Coin',
-    description:
-      "To learn more about Blockchain, I created a barebones, account based Proof-of-Work blockchain that allows users to create wallets and send Kisto Coin's to one another.",
-    tags: ['react', 'typescript', 'tailwind', 'java', 'spring'],
-    link: 'https://github.com/rohitrtk/kisto-coin',
-  },
-
-  {
-    title: 'SQL Release Note Tool',
-    description:
-      'Written as part of a yearly competition at Kenna, myself and two colleagues created a windowed application to assist in creating release notes which are used to move SQL code throughout our various deployment environments.',
-    tags: ['tauri', 'rust', 'react', 'typescript', 'tailwind', 'mssql'],
-    proprietary: true,
-  },
-  {
-    title: 'Kill Task Utility',
-    description:
-      'Working with multiple running Express instances, occasionally results in the message "This port is in use". Through the terminal, calling this utility program lets me terminate all programs running on a list of ports.',
-    tags: ['rust'],
-    link: 'https://github.com/rohitrtk/killtask2',
-  },
-  {
-    title: 'Instagram 4 Pomeranians',
-    description:
-      'An Instagram clone with a twist. Users can only upload pictures of my favourite dog breed - The Pomeranian. This is enforced via image recognition.',
-    tags: ['react', 'typescript', 'mongodb', 'node', 'express'],
-    link: 'https://github.com/rohitrtk/pomstagram',
-  },
-  {
-    title: 'Student Registration Form',
-    description:
-      "Created during my co-op placement at Six Nations Polytechnic. This was designed to be a drop in replacement for OUAC (Ontario Universities' Applcation Centre) allowing for a more streamlined student application process.",
-    tags: ['javascript', 'jquery', 'bootstrap', 'php', 'mysql'],
-    proprietary: true,
-  },
-];
+import ProjectGallery from '@/components/project-gallery';
+import { projects } from '@/data/projects';
 
 const Projects = () => {
   return (
@@ -70,49 +17,64 @@ const Projects = () => {
         <h2 className="mb-4 text-4xl tracking-tight md:text-5xl">Projects</h2>
         <Separator className="mb-16" />
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((project) => (
-            <div
+            <article
               key={project.title}
-              className="p-8 rounded-lg border transition-all bg-card border-muted hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5 flex flex-col"
+              className="group flex flex-col overflow-hidden rounded-xl border border-muted bg-card transition-all hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5"
             >
-              <div>
+              {project.coverImage && (
+                <ProjectGallery
+                  title={project.title}
+                  coverImage={project.coverImage}
+                  images={project.images ?? []}
+                />
+              )}
+
+              <div className="flex flex-1 flex-col p-6 sm:p-8">
                 <div className="flex items-start justify-between gap-4">
-                  <h3 className="text-xl tracking-tight">{project.title}</h3>
+                  <h3 className="text-xl tracking-tight sm:text-2xl">
+                    {project.title}
+                  </h3>
 
                   {project.proprietary ? (
                     <span
-                      className="text-muted-foreground"
+                      className="shrink-0 text-muted-foreground"
                       title="This project is proprietary"
                       aria-label="Proprietary project"
                     >
-                      <LockIcon size={20} />
+                      <LockIcon size={20} aria-hidden="true" />
                     </span>
                   ) : (
                     project.link && (
-                      <Button asChild variant="ghost" size="icon">
+                      <Button
+                        asChild
+                        variant="ghost"
+                        size="icon"
+                        className="shrink-0"
+                      >
                         <a
                           href={project.link}
                           target="_blank"
                           rel="noreferrer"
                           aria-label={`Open ${project.title}`}
                         >
-                          <ExternalLink size={20} />
+                          <ExternalLink size={20} aria-hidden="true" />
                         </a>
                       </Button>
                     )
                   )}
                 </div>
 
-                <p className="mb-6 leading-relaxed text-muted-foreground">
+                <p className="mb-6 mt-3 leading-relaxed text-muted-foreground">
                   {project.description}
                 </p>
-              </div>
 
-              <div className="mt-auto">
-                <Tags tags={project.tags} />
+                <div className="mt-auto">
+                  <Tags tags={project.tags} />
+                </div>
               </div>
-            </div>
+            </article>
           ))}
         </div>
       </AnimatedContent>
