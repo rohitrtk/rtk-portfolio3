@@ -10,8 +10,14 @@ import { projects } from '@/data/projects';
 const Projects = () => {
   return (
     <Section id="projects">
-      <div className="absolute top-1/4 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500" />
-      <div className="absolute bottom-1/4 right-0 w-125 h-125 rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500" />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none top-1/4 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500"
+      />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none bottom-1/4 right-0 w-125 h-125 rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500"
+      />
 
       <AnimatedContent>
         <h2 className="mb-4 text-4xl tracking-tight md:text-5xl">Projects</h2>

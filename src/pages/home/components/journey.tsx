@@ -74,9 +74,14 @@ const experiences: Experience[] = [
 const Journey = () => {
   return (
     <Section id="journey">
-      <div className="absolute right-1/4 top-0 h-64 w-[600px] rotate-12 bg-purple-400 opacity-10 blur-3xl dark:bg-purple-500" />
-
-      <div className="absolute bottom-1/3 left-1/4 h-96 w-[400px] -rotate-12 bg-emerald-400 opacity-10 blur-3xl dark:bg-emerald-500" />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none right-1/4 top-0 h-64 w-[600px] rotate-12 bg-purple-400 opacity-10 blur-3xl dark:bg-purple-500"
+      />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none bottom-1/3 left-1/4 h-96 w-[400px] -rotate-12 bg-emerald-400 opacity-10 blur-3xl dark:bg-emerald-500"
+      />
 
       <AnimatedContent className="max-w-5xl">
         <h2 className="mb-4 text-4xl tracking-tight md:text-5xl">

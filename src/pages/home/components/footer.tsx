@@ -22,7 +22,7 @@ const Footer = () => {
     <footer className="relative overflow-hidden border-t bg-background">
       <div
         aria-hidden="true"
-        className="absolute bottom-0 left-1/2 h-48 w-96 -translate-x-1/2 bg-emerald-400/10 blur-3xl dark:bg-emerald-500/10"
+        className="absolute pointer-events-none bottom-0 left-1/2 h-48 w-96 -translate-x-1/2 bg-emerald-400/10 blur-3xl dark:bg-emerald-500/10"
       />
 
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-10 sm:px-8 lg:px-10">

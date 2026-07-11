@@ -68,8 +68,14 @@ const Contact = () => {
 
   return (
     <Section id="contact">
-      <div className="absolute top-0 right-0 w-96 h-96 blur-3xl opacity-10 bg-purple-400 dark:bg-purple-500" />
-      <div className="absolute bottom-0 left-1/3 w-[600px] h-48 blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500" />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none top-0 right-0 w-96 h-96 blur-3xl opacity-10 bg-purple-400 dark:bg-purple-500"
+      />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none bottom-0 left-1/3 w-[600px] h-48 blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500"
+      />
 
       <AnimatedContent>
         <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">
