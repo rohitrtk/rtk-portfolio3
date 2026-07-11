@@ -18,14 +18,18 @@ const Hero = () => {
   return (
     <Section id="hero" verticalPadding={false}>
       <div
-        className="absolute inset-0 opacity-[0.02]"
+        aria-hidden={true}
+        className="absolute pointer-events-none inset-0 opacity-[0.02]"
         style={{
           backgroundImage: `linear-gradient(${isDark ? '#E5E7EB' : `#111111`} 1px, transparent 1px), linear-gradient(90deg, ${isDark ? '#E5E7EB' : '#111111'} 1px, transparent 1px)`,
           backgroundSize: '40px 40px',
         }}
       />
 
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 bg-emerald-400 dark:bg-emerald-500" />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none top-1/4 right-1/4 w-96 h-96 rounded-full blur-3xl opacity-20 bg-emerald-400 dark:bg-emerald-500"
+      />
 
       <AnimatedContent>
         <div className="inline-block px-4 py-2 rounded-full border mb-8 bg-emerald-50 border-emerald-200 text-emerald-700 dark:bg-emerald-500/10 dark:border-emerald-500/20 dark:text-emerald-400">

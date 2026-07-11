@@ -19,8 +19,14 @@ const coreSkills: IconKey[] = [
 const About = () => {
   return (
     <Section id="about">
-      <div className="absolute top-1/3 left-1/3 w-[700px] h-32 blur-3xl opacity-10 -rotate-45 bg-cyan-400 dark:bg-cyan-500" />
-      <div className="absolute bottom-1/4 right-1/4 h-[500px] w-[500px] -rotate-45 bg-emerald-400 opacity-10 blur-3xl dark:bg-emerald-500" />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none top-1/3 left-1/3 w-[700px] h-32 blur-3xl opacity-10 -rotate-45 bg-cyan-400 dark:bg-cyan-500"
+      />
+      <div
+        aria-hidden={true}
+        className="absolute pointer-events-none bottom-1/4 right-1/4 h-[500px] w-[500px] -rotate-45 bg-emerald-400 opacity-10 blur-3xl dark:bg-emerald-500"
+      />
 
       <AnimatedContent>
         <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">About</h2>

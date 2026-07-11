@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Maximize2 } from 'lucide-react';
-
+import { Skeleton } from '@/components/ui/skeleton';
 import {
   type CarouselApi,
   Carousel,
@@ -27,6 +27,18 @@ export type ProjectImage = {
   position?: string;
 };
 
+const preloadImage = (src: string) => {
+  const image = new Image();
+
+  image.src = src;
+
+  if (typeof image.decode === 'function') {
+    void image.decode().catch(() => {
+      // The browser may reject decode even if the image loaded successfully.
+    });
+  }
+};
+
 type ProjectGalleryProps = {
   title: string;
   coverImage: ProjectImage;
@@ -41,6 +53,31 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
 
   const hasGallery = images.length > 0;
 
+  const [loadedImages, setLoadedImages] = useState<Set<string>>(
+    () => new Set(),
+  );
+  const [failedImages, setFailedImages] = useState<Set<string>>(
+    () => new Set(),
+  );
+
+  const handleImageLoad = (src: string) => {
+    setLoadedImages((curr) => {
+      const next = new Set(curr);
+      next.add(src);
+
+      return next;
+    });
+  };
+
+  const handleImageError = (src: string) => {
+    setFailedImages((current) => {
+      const next = new Set(current);
+      next.add(src);
+
+      return next;
+    });
+  };
+
   const updateCurrentSlide = useCallback((carouselApi: CarouselApi) => {
     if (!carouselApi) {
       return;
@@ -49,6 +86,32 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
     setCurrentSlide(carouselApi.selectedScrollSnap() + 1);
     setSlideCount(carouselApi.scrollSnapList().length);
   }, []);
+
+  const preloadFirstImage = useCallback(() => {
+    const firstImage = images[0];
+
+    if (firstImage) {
+      preloadImage(firstImage.src);
+    }
+  }, [images]);
+
+  const preloadGallery = useCallback(() => {
+    images.forEach((image) => {
+      preloadImage(image.src);
+    });
+  }, [images]);
+
+  useEffect(() => {
+    if (!hasGallery) {
+      return;
+    }
+
+    const timeoutId = window.setTimeout(preloadFirstImage, 500);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }, [hasGallery, preloadFirstImage]);
 
   useEffect(() => {
     if (!api) {
@@ -124,10 +187,22 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(nextOpen) => {
+        if (nextOpen) {
+          preloadGallery();
+        }
+
+        setOpen(nextOpen);
+      }}
+    >
       <DialogTrigger asChild>
         <button
           type="button"
+          onMouseEnter={preloadGallery}
+          onFocus={preloadGallery}
+          onPointerDown={preloadGallery}
           className="group/gallery relative block aspect-[16/10] w-full overflow-hidden border-b bg-muted/40 text-left outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           aria-label={`Open ${title} screenshot gallery`}
         >
@@ -154,31 +229,59 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
             className="mx-auto w-full"
           >
             <CarouselContent className="-ml-0">
-              {images.map((image, index) => (
-                <CarouselItem key={image.src} className="pl-0">
-                  <figure className="flex flex-col gap-3">
-                    <div className="flex h-[55dvh] items-center justify-center overflow-hidden rounded-lg bg-muted/40 sm:h-[64dvh] lg:h-[68dvh]">
-                      <img
-                        src={image.src}
-                        alt={image.alt}
-                        loading={index === 0 ? 'eager' : 'lazy'}
-                        decoding="async"
-                        draggable={false}
-                        className="size-full select-none object-contain"
-                        style={{
-                          objectPosition: image.position,
-                        }}
-                      />
-                    </div>
+              {images.map((image, index) => {
+                const loaded = loadedImages.has(image.src);
+                const failed = failedImages.has(image.src);
 
-                    {image.caption && (
-                      <figcaption className="px-4 text-center text-sm text-muted-foreground">
-                        {image.caption}
-                      </figcaption>
-                    )}
-                  </figure>
-                </CarouselItem>
-              ))}
+                return (
+                  <CarouselItem key={image.src} className="min-w-0 pl-0">
+                    <figure className="flex flex-col gap-3">
+                      <div className="relative flex h-[55dvh] items-center justify-center overflow-hidden rounded-lg bg-muted/40 sm:h-[64dvh] lg:h-[68dvh]">
+                        {!loaded && !failed && <ImageLoadingPlaceholder />}
+
+                        {failed && (
+                          <div
+                            role="alert"
+                            className="absolute inset-0 flex flex-col items-center justify-center gap-2 p-6 text-center"
+                          >
+                            <p className="font-medium">
+                              Unable to load this screenshot
+                            </p>
+
+                            <p className="text-sm text-muted-foreground">
+                              Check that the image path is correct.
+                            </p>
+                          </div>
+                        )}
+
+                        <img
+                          src={image.src}
+                          alt={image.alt}
+                          loading={index === 0 ? 'eager' : 'lazy'}
+                          fetchPriority={index === 0 ? 'high' : 'auto'}
+                          decoding="async"
+                          draggable={false}
+                          onLoad={() => handleImageLoad(image.src)}
+                          onError={() => handleImageError(image.src)}
+                          className={cn(
+                            'size-full max-w-full select-none object-contain transition-opacity duration-300',
+                            loaded && !failed ? 'opacity-100' : 'opacity-0',
+                          )}
+                          style={{
+                            objectPosition: image.position,
+                          }}
+                        />
+                      </div>
+
+                      {image.caption && (
+                        <figcaption className="min-h-10 px-4 text-center text-sm text-muted-foreground">
+                          {image.caption}
+                        </figcaption>
+                      )}
+                    </figure>
+                  </CarouselItem>
+                );
+              })}
             </CarouselContent>
 
             {images.length > 1 && (
@@ -232,3 +335,19 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
 };
 
 export default ProjectGallery;
+
+const ImageLoadingPlaceholder = () => {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center p-4">
+      <Skeleton className="size-full rounded-lg" />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
+        <span className="size-8 animate-spin rounded-full border-2 border-muted-foreground/20 border-t-emerald-500" />
+
+        <span className="text-sm text-muted-foreground">
+          Loading screenshot...
+        </span>
+      </div>
+    </div>
+  );
+};
