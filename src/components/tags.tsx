@@ -2,7 +2,9 @@ import Icons, { type IconKey } from '@/util/icons';
 import { ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
-import Tag from './tag';
+import Tag from '@/components/tag';
+import { useIsMobile } from '@/hooks/use-is-mobile';
+import { cn } from '@/lib/utils';
 
 type Props = {
   tags: IconKey[];
@@ -10,8 +12,21 @@ type Props = {
 
 const Tags = ({ tags }: Props) => {
   const [open, setOpen] = useState(false);
+  const isMobile = useIsMobile();
 
-  const toggleOpen = () => setOpen((prev) => !prev);
+  const toggleOpen = () => {
+    setOpen((previous) => !previous);
+  };
+
+  const tagList = (
+    <div className="mt-2 flex flex-wrap gap-2">
+      {tags.map((tag) => {
+        const { id, name, iconClass } = Icons[tag];
+
+        return <Tag key={id} name={name} icon={iconClass} />;
+      })}
+    </div>
+  );
 
   return (
     <div>
@@ -23,35 +38,45 @@ const Tags = ({ tags }: Props) => {
       >
         <ChevronRight
           size={20}
-          className={`transition-transform ${open ? 'rotate-90' : 'rotate-0'}`}
+          aria-hidden="true"
+          className={cn(
+            !isMobile && 'transition-transform',
+            open ? 'rotate-90' : 'rotate-0',
+          )}
         />
-        See Skills
-      </button>
-      <AnimatePresence initial={false}>
-        {open && (
-          <motion.div
-            initial={{ height: 0 }}
-            animate={{ height: 'auto' }}
-            exit={{ height: 0 }}
-            transition={{ duration: 0.22, ease: 'easeInOut' }}
-            className="overflow-hidden"
-          >
-            <motion.div
-              initial={{ opacity: 0, y: -4 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -4 }}
-              transition={{ duration: 0.18 }}
-              className="mt-2 flex flex-wrap gap-2"
-            >
-              {tags.map((tag) => {
-                const { id, name, iconClass } = Icons[tag];
 
-                return <Tag key={id} name={name} icon={iconClass} />;
-              })}
+        <span>{open ? 'Hide Skills' : 'See Skills'}</span>
+      </button>
+
+      {isMobile ? (
+        open ? (
+          tagList
+        ) : null
+      ) : (
+        <AnimatePresence initial={false}>
+          {open && (
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: 'auto' }}
+              exit={{ height: 0 }}
+              transition={{
+                duration: 0.22,
+                ease: 'easeInOut',
+              }}
+              className="overflow-hidden"
+            >
+              <motion.div
+                initial={{ opacity: 0, y: -4 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -4 }}
+                transition={{ duration: 0.18 }}
+              >
+                {tagList}
+              </motion.div>
             </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      )}
     </div>
   );
 };

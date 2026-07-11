@@ -6,6 +6,7 @@ import { Menu, Moon, Sun, X } from 'lucide-react';
 import { scrollToSection } from '@/util';
 import { AnimatePresence, motion } from 'motion/react';
 import Logo from '@/components/logo';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 
 const items = [
   { id: 'projects', text: 'Projects' },
@@ -19,6 +20,7 @@ const Navigation = () => {
   const menuRef = useRef<HTMLDivElement | null>(null);
 
   const { isDark, toggleTheme } = useTheme();
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -46,10 +48,47 @@ const Navigation = () => {
     }
   };
 
+  const menuContent = (
+    <div className="flex flex-col gap-1 px-4 py-4">
+      {items.map(({ id, text }) => (
+        <Button
+          key={id}
+          type="button"
+          variant="ghost"
+          className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+          onClick={() => handleNavItemClick(id)}
+        >
+          {text}
+        </Button>
+      ))}
+
+      <Separator className="my-2" />
+
+      <Button
+        type="button"
+        variant="ghost"
+        className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+        onClick={toggleTheme}
+      >
+        {isDark ? (
+          <>
+            Light Mode
+            <Sun data-icon="inline-end" size={20} />
+          </>
+        ) : (
+          <>
+            Dark Mode
+            <Moon data-icon="inline-end" size={20} />
+          </>
+        )}
+      </Button>
+    </div>
+  );
+
   return (
     <>
       <nav className="fixed top-0 left-0 right-0 z-50 border-b backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-6 py-4 hidden md:flex items-center justify-between">
+        <div className="max-w-6xl mx-auto px-6 py-4 hidden md:flex items-center justify-between">
           <Logo />
 
           <div className="flex items-center gap-1">
@@ -98,53 +137,27 @@ const Navigation = () => {
             {open ? <X size={20} /> : <Menu size={20} />}
           </Button>
         </div>
-        <AnimatePresence>
-          {open && (
-            <motion.div
-              onMouseDown={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden absolute top-full left-0 right-0 border-b backdrop-blur-md bg-background/95"
-            >
-              <div className="flex flex-col px-6 py-4 gap-4">
-                {items.map(({ id, text }) => (
-                  <Button
-                    key={id}
-                    type="button"
-                    variant="ghost"
-                    className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
-                    onClick={() => handleNavItemClick(id)}
-                  >
-                    {text}
-                  </Button>
-                ))}
-
-                <Separator />
-
-                <Button
-                  type="button"
-                  variant="ghost"
-                  className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
-                  onClick={toggleTheme}
-                >
-                  {isDark ? (
-                    <>
-                      Light Mode
-                      <Sun data-icon="inline-end" size={20} />
-                    </>
-                  ) : (
-                    <>
-                      Dark Mode
-                      <Moon data-icon="inline-end" size={20} />
-                    </>
-                  )}
-                </Button>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {isMobile ? (
+          open && (
+            <div className="border-t bg-background lg:hidden">
+              {menuContent}
+            </div>
+          )
+        ) : (
+          <AnimatePresence initial={false}>
+            {open && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.2 }}
+                className="overflow-hidden border-t bg-background lg:hidden"
+              >
+                {menuContent}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        )}
       </nav>
     </>
   );
