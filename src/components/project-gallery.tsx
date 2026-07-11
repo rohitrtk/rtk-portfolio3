@@ -18,14 +18,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 import { cn } from '@/lib/utils';
-
-export type ProjectImage = {
-  src: string;
-  alt: string;
-  caption?: string;
-  fit?: 'cover' | 'contain';
-  position?: string;
-};
+import { type ProjectImage } from '@/types/project';
 
 const preloadImage = (src: string) => {
   const image = new Image();
@@ -118,8 +111,6 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
       return;
     }
 
-    updateCurrentSlide(api);
-
     api.on('select', updateCurrentSlide);
     api.on('reInit', updateCurrentSlide);
 
@@ -135,7 +126,6 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
     }
 
     api.scrollTo(0);
-    setCurrentSlide(1);
   }, [open, api]);
 
   const cover = (

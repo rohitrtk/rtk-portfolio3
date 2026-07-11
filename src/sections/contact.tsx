@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
+import { toast } from 'sonner';
 
 const initialFormData = {
   name: '',
@@ -38,15 +39,29 @@ const Contact = () => {
         body: JSON.stringify(data),
       });
 
-      const result = await response.json();
+      const result = (await response.json()) as {
+        success?: boolean;
+        message?: string;
+      };
 
       if (!response.ok) {
         throw new Error(result.message || 'Unable to send your message.');
       }
 
       setFormData(initialFormData);
+
+      toast.success('Message sent successfully', {
+        description: "Thanks for reaching out. I'll get back to you soon.",
+      });
     } catch (error) {
-      console.error(error);
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'Something went wrong while sending your message.';
+
+      toast.error('Unable to send message', {
+        description: message,
+      });
     } finally {
       setSending(false);
     }
@@ -156,7 +171,7 @@ const Contact = () => {
               <Send data-icon="inline-start" size={20} />
             )}
 
-            {sending ? 'Sending...' : 'Send'}
+            {sending ? 'Sending...' : 'Send Message'}
           </Button>
         </form>
       </AnimatedContent>
