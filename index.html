@@ -18,6 +18,33 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      (() => {
+        const storageKey = 'theme';
+        const storedTheme = localStorage.getItem(storageKey);
+
+        const prefersDark = window.matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches;
+
+        const prefersLight = window.matchMedia(
+          '(prefers-color-scheme: light)',
+        ).matches;
+
+        const theme =
+          storedTheme === 'light' || storedTheme === 'dark'
+            ? storedTheme
+            : prefersDark
+              ? 'dark'
+              : prefersLight
+                ? 'light'
+                : 'dark';
+
+        document.documentElement.classList.toggle('dark', theme === 'dark');
+
+        document.documentElement.style.colorScheme = theme;
+      })();
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

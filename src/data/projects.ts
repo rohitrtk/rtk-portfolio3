@@ -14,6 +14,11 @@ export const projects = [
     },
     images: [
       {
+        src: '/projects/fi-learn/fi-learn-1.webp',
+        alt: 'FiLearn user dashboard',
+        caption: 'The FiLearn welcome screen.',
+      },
+      {
         src: '/projects/fi-learn/fi-learn-2.webp',
         alt: 'FiLearn user dashboard',
         caption: 'User dashboard containing learning modules.',
@@ -60,6 +65,11 @@ export const projects = [
       position: 'top',
     },
     images: [
+      {
+        src: '/projects/kisto-coin/kisto-coin-1.webp',
+        alt: 'Kisto Coin wallet creation dialog',
+        caption: 'The Kisto Coin wallets dashboard.',
+      },
       {
         src: '/projects/kisto-coin/kisto-coin-2.webp',
         alt: 'Kisto Coin wallet creation dialog',

@@ -72,12 +72,7 @@ const Hero = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button
-            asChild
-            variant="outline"
-            size="icon-responsive"
-            className="hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
-          >
+          <Button asChild variant="outline" size="icon-responsive">
             <a
               href={linkedInProfileUrl}
               target="_blank"
@@ -89,12 +84,7 @@ const Hero = () => {
             </a>
           </Button>
 
-          <Button
-            asChild
-            variant="outline"
-            size="icon-responsive"
-            className="hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
-          >
+          <Button asChild variant="outline" size="icon-responsive">
             <a
               href={githubProfileUrl}
               target="_blank"
