@@ -2,6 +2,74 @@ import type { Project } from '@/types/project';
 
 export const projects = [
   {
+    title: 'MapleRoom',
+    description:
+      'A local-first TFSA planner that estimates contribution room, charts saving activity, and manages contributions, withdrawals, CSV imports, and recurring schedules with data stored in SQLite.',
+    tags: ['react', 'typescript', 'tailwind', 'python', 'sqlite'],
+    link: 'https://github.com/rohitrtk/maple-room',
+    coverImage: {
+      src: '/projects/maple-room/maple-room-1.webp',
+      alt: 'MapleRoom TFSA dashboard with estimated contribution room and annual summaries',
+      position: 'top',
+    },
+    images: [
+      {
+        src: '/projects/maple-room/maple-room-1.webp',
+        alt: 'MapleRoom TFSA dashboard with estimated contribution room and annual summaries',
+        caption:
+          'The dashboard estimates available TFSA room and summarizes contributions, monthly pace, and projected room exhaustion.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-2.webp',
+        alt: 'MapleRoom monthly contribution and annual activity charts',
+        caption:
+          'Monthly and annual charts provide visual context for contributions, withdrawals, and new annual room.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-3.webp',
+        alt: 'MapleRoom local TFSA profile dialog',
+        caption:
+          'A local profile personalizes the dashboard and determines when TFSA room began accruing.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-4.webp',
+        alt: 'MapleRoom batch TFSA activity entry form',
+        caption:
+          'The batch-entry workflow supports contributions, withdrawals, CSV imports, notes, institutions, and important flags.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-5.webp',
+        alt: 'MapleRoom expanded batch activity form with multiple entries',
+        caption:
+          'Multiple entries can be reviewed, validated, expanded, or removed before they are saved together.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-6.webp',
+        alt: 'MapleRoom recurring contribution schedule list',
+        caption:
+          'Recurring contribution schedules automatically add due entries to the local ledger exactly once.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-7.webp',
+        alt: 'MapleRoom recurring contribution creation form',
+        caption:
+          'Monthly schedules support configurable amounts, contribution days, date ranges, institutions, and notes.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-8.webp',
+        alt: 'MapleRoom searchable TFSA contribution activity ledger',
+        caption:
+          'The activity ledger combines manual and recurring entries with search, filtering, flags, and row actions.',
+      },
+      {
+        src: '/projects/maple-room/maple-room-10.webp',
+        alt: 'MapleRoom paginated recurring contribution history',
+        caption:
+          'Server-side pagination keeps long contribution histories manageable as the local ledger grows.',
+      },
+    ],
+  },
+  {
     title: 'Opening Bell',
     description:
       'A pre-market research dashboard that turns recent financial news and market data into a ranked watchlist of stocks and ETFs, with attention, direction, and confidence signals.',
@@ -163,24 +231,10 @@ export const projects = [
     proprietary: true,
   },
   {
-    title: 'Kill Task Utility',
-    description:
-      'When working with multiple Express instances, I occasionally encounter ports that remain in use. This terminal utility terminates programs running on a configured list of ports.',
-    tags: ['rust'],
-    link: 'https://github.com/rohitrtk/killtask2',
-  },
-  {
     title: 'Instagram 4 Pomeranians',
     description:
       'An Instagram clone with a twist: users can only upload pictures of my favourite dog breed, the Pomeranian. This is enforced through image recognition.',
     tags: ['react', 'typescript', 'mongodb', 'node', 'express'],
     link: 'https://github.com/rohitrtk/pomstagram',
-  },
-  {
-    title: 'Student Registration Form',
-    description:
-      "Created during my co-op placement at Six Nations Polytechnic. This was designed as a drop-in replacement for OUAC, the Ontario Universities' Application Centre, providing a more streamlined student application process.",
-    tags: ['javascript', 'jquery', 'bootstrap', 'php', 'mysql'],
-    proprietary: true,
   },
 ] satisfies Project[];

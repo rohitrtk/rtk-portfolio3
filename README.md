@@ -27,6 +27,9 @@ technical skills, and contact information.
 
 The portfolio includes the following non-proprietary projects:
 
+- [MapleRoom](https://github.com/rohitrtk/maple-room) — A local-first TFSA
+  planner for tracking contribution room, activity, and recurring schedules in
+  SQLite.
 - [Opening Bell](https://github.com/rohitrtk/opening-bell) — A pre-market
   research dashboard that ranks stocks and ETFs using recent financial news and
   market data.
@@ -34,8 +37,6 @@ The portfolio includes the following non-proprietary projects:
   learning platform that rewards completed quizzes with tokens.
 - [Kisto Coin](https://github.com/rohitrtk/kisto-coin) — An account-based,
   proof-of-work blockchain with wallet and transfer functionality.
-- [Kill Task Utility](https://github.com/rohitrtk/killtask2) — A Rust terminal
-  utility for terminating processes that occupy configured ports.
 - [Instagram 4 Pomeranians](https://github.com/rohitrtk/pomstagram) — An
   Instagram-style application that uses image recognition to allow only
   Pomeranian photos.

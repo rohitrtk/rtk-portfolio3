@@ -129,6 +129,11 @@ export const icons = {
     name: 'Prisma',
     iconClass: 'devicon-prisma-original colored',
   },
+  sqlite: {
+    id: 'sqlite',
+    name: 'SQLite',
+    iconClass: 'devicon-sqlite-plain colored',
+  },
 
   // Cloud / DevOps
   azure: {
