@@ -89,7 +89,7 @@ const Contact = () => {
       />
       <div
         aria-hidden={true}
-        className="absolute pointer-events-none bottom-0 left-1/3 w-[600px] h-48 blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500"
+        className="absolute pointer-events-none bottom-0 left-1/3 w-150 h-48 blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500"
       />
 
       <AnimatedContent>

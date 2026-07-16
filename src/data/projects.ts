@@ -2,6 +2,50 @@ import type { Project } from '@/types/project';
 
 export const projects = [
   {
+    title: 'Opening Bell',
+    description:
+      'A pre-market research dashboard that turns recent financial news and market data into a ranked watchlist of stocks and ETFs, with attention, direction, and confidence signals.',
+    tags: ['react', 'typescript', 'tailwind', 'python'],
+    link: 'https://github.com/rohitrtk/opening-bell',
+    coverImage: {
+      src: '/projects/opening-bell/opening-bell-1.webp',
+      alt: 'Opening Bell morning brief dashboard with market news tone and ranked watchlist',
+      position: 'top',
+    },
+    images: [
+      {
+        src: '/projects/opening-bell/opening-bell-1.webp',
+        alt: 'Opening Bell morning brief dashboard with market news tone and ranked watchlist',
+        caption:
+          'The morning brief summarizes market news tone and ranks stocks and ETFs by recent news attention.',
+      },
+      {
+        src: '/projects/opening-bell/opening-bell-2.webp',
+        alt: 'Opening Bell watchlist and signal methodology',
+        caption:
+          "The watchlist presents likely direction, price movement, attention, confidence, and each ticker's top catalyst.",
+      },
+      {
+        src: '/projects/opening-bell/opening-bell-3.webp',
+        alt: 'Opening Bell ticker signal overview drawer',
+        caption:
+          'The signal overview explains why a ticker is ranked and displays the news stories contributing to its score.',
+      },
+      {
+        src: '/projects/opening-bell/opening-bell-4.webp',
+        alt: 'Opening Bell ticker technical metrics drawer',
+        caption:
+          'The technicals view combines current market data with range, volume, valuation, earnings, and company metrics.',
+      },
+      {
+        src: '/projects/opening-bell/opening-bell-5.webp',
+        alt: 'Opening Bell six-month candlestick chart',
+        caption:
+          'A six-month daily candlestick chart provides price context for each news-derived signal.',
+      },
+    ],
+  },
+  {
     title: 'FiLearn',
     description:
       'An online learning platform for finance and crypto. Completing quizzes rewards the user with FILEARN tokens.',
