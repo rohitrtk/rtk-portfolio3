@@ -1,10 +1,10 @@
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import Icons from '@/util/icons';
 import { scrollToSection } from '@/util';
-
-const linkedInIconClass = Icons['linkedin-colourless'].iconClass;
-const githubIconClass = Icons['github-colourless'].iconClass;
+import {
+  GithubIconColourless,
+  LinkedinIconColourless,
+} from '@/components/icons';
 
 const linkedInProfileUrl = 'https://www.linkedin.com/in/rohit-kisto/';
 const githubProfileUrl = 'https://github.com/rohitrtk';
@@ -69,10 +69,12 @@ const Footer = () => {
                   aria-label="View Rohit Kisto on LinkedIn"
                   title="LinkedIn"
                 >
-                  <i
+                  <span
                     aria-hidden="true"
-                    className={`${linkedInIconClass} text-xl`}
-                  />
+                    className="inline-flex items-center justify-center size-10 [&>svg]:size-full [&_path]:fill-current"
+                  >
+                    <LinkedinIconColourless />
+                  </span>
                 </a>
               </Button>
 
@@ -89,10 +91,12 @@ const Footer = () => {
                   aria-label="View Rohit Kisto on GitHub"
                   title="GitHub"
                 >
-                  <i
+                  <span
                     aria-hidden="true"
-                    className={`${githubIconClass} text-xl`}
-                  />
+                    className="inline-flex items-center justify-center size-10 [&>svg]:size-full [&_path]:fill-current"
+                  >
+                    <GithubIconColourless />
+                  </span>
                 </a>
               </Button>
             </div>

@@ -1,198 +1,117 @@
+import type { ComponentType } from 'react';
+import {
+  AframeIcon,
+  AzureIcon,
+  BootstrapIcon,
+  CIcon,
+  CsharpIcon,
+  CssIcon,
+  DockerIcon,
+  ExpressIcon,
+  FastApi,
+  GithubIcon,
+  GithubIconColourless,
+  HardhatIcon,
+  HtmlIcon,
+  JavaIcon,
+  JavascriptIcon,
+  JqueryIcon,
+  LinkedinIcon,
+  LinkedinIconColourless,
+  MavenIcon,
+  MongoDbIcon,
+  MySqlIcon,
+  NextjsIcon,
+  NodejsIcon,
+  NumpyIcon,
+  PandasIcon,
+  PhpIcon,
+  PostgresqlIcon,
+  PrismaIcon,
+  PythonIcon,
+  ReactIcon,
+  RustIcon,
+  ScssIcon,
+  SolidityIcon,
+  SpringIcon,
+  SqliteIcon,
+  SqlServerIcon,
+  StreamlitIcon,
+  TailwindIcon,
+  TauriIcon,
+  TypescriptIcon,
+  UnityIcon,
+} from '@/components/icons';
+
+const defineIcon = <const Id extends string>(
+  id: Id,
+  name: string,
+  icon: ComponentType,
+) => ({
+  id,
+  name,
+  icon,
+});
+
 export const icons = {
   // Frontend
-  react: {
-    id: 'react',
-    name: 'React',
-    iconClass: 'devicon-react-original colored',
-  },
-  nextjs: {
-    id: 'nextjs',
-    name: 'Next.js',
-    iconClass: 'devicon-nextjs-plain colored',
-  },
-  javascript: {
-    id: 'javascript',
-    name: 'JavaScript',
-    iconClass: 'devicon-javascript-plain colored',
-  },
-  typescript: {
-    id: 'typescript',
-    name: 'TypeScript',
-    iconClass: 'devicon-typescript-plain colored',
-  },
-  tailwind: {
-    id: 'tailwind',
-    name: 'Tailwind',
-    iconClass: 'devicon-tailwindcss-original colored',
-  },
-  html: {
-    id: 'html',
-    name: 'Html',
-    iconClass: 'devicon-html5-plain colored',
-  },
-  css: {
-    id: 'css',
-    name: 'Css',
-    iconClass: 'devicon-css3-original colored',
-  },
-  scss: {
-    id: 'scss',
-    name: 'Scss',
-    iconClass: 'devicon-sass-original colored',
-  },
-  bootstrap: {
-    id: 'bootstrap',
-    name: 'Bootstrap',
-    iconClass: 'devicon-bootstrap-plain colored',
-  },
-  jquery: {
-    id: 'jquery',
-    name: 'jQuery',
-    iconClass: 'devicon-jquery-plain colored',
-  },
+  react: defineIcon('react', 'React', ReactIcon),
+  nextjs: defineIcon('nextjs', 'Next.js', NextjsIcon),
+  javascript: defineIcon('javascript', 'JavaScript', JavascriptIcon),
+  typescript: defineIcon('typescript', 'TypeScript', TypescriptIcon),
+  tailwind: defineIcon('tailwind', 'Tailwind', TailwindIcon),
+  html: defineIcon('html', 'HTML', HtmlIcon),
+  css: defineIcon('css', 'CSS', CssIcon),
+  scss: defineIcon('scss', 'SCSS', ScssIcon),
+  bootstrap: defineIcon('bootstrap', 'Bootstrap', BootstrapIcon),
+  jquery: defineIcon('jquery', 'jQuery', JqueryIcon),
 
   // Backend / Runtime
-  node: {
-    id: 'node',
-    name: 'Node.js',
-    iconClass: 'devicon-nodejs-plain colored',
-  },
-  express: {
-    id: 'express',
-    name: 'Express.js',
-    iconClass: 'devicon-express-original colored',
-  },
-  rust: {
-    id: 'rust',
-    name: 'Rust',
-    iconClass: 'devicon-rust-original colored',
-  },
-  php: {
-    id: 'php',
-    name: 'PHP',
-    iconClass: 'devicon-php-plain colored',
-  },
-  python: {
-    id: 'python',
-    name: 'Python',
-    iconClass: 'devicon-python-plain colored',
-  },
-  java: {
-    id: 'java',
-    name: 'Java',
-    iconClass: 'devicon-java-plain colored',
-  },
-  spring: {
-    id: 'spring',
-    name: 'Spring',
-    iconClass: 'devicon-spring-original colored',
-  },
-  c: {
-    id: 'c',
-    name: 'C',
-    iconClass: 'devicon-c-original colored',
-  },
-  csharp: {
-    id: 'csharp',
-    name: 'C#',
-    iconClass: 'devicon-csharp-plain colored',
-  },
-  solidity: {
-    id: 'solidity',
-    name: 'Solidity',
-    iconClass: 'devicon-solidity-plain colored',
-  },
+  node: defineIcon('node', 'Node.js', NodejsIcon),
+  express: defineIcon('express', 'Express.js', ExpressIcon),
+  rust: defineIcon('rust', 'Rust', RustIcon),
+  php: defineIcon('php', 'PHP', PhpIcon),
+  python: defineIcon('python', 'Python', PythonIcon),
+  java: defineIcon('java', 'Java', JavaIcon),
+  spring: defineIcon('spring', 'Spring', SpringIcon),
+  c: defineIcon('c', 'C', CIcon),
+  csharp: defineIcon('csharp', 'C#', CsharpIcon),
+  solidity: defineIcon('solidity', 'Solidity', SolidityIcon),
+  fastapi: defineIcon('fastapi', 'FastAPI', FastApi),
 
   // Databases
-  postgresql: {
-    id: 'postgresql',
-    name: 'PostgreSQL',
-    iconClass: 'devicon-postgresql-plain colored',
-  },
-  mssql: {
-    id: 'mssql',
-    name: 'MS SQL Server',
-    iconClass: 'devicon-microsoftsqlserver-plain colored',
-  },
-  mysql: {
-    id: 'mysql',
-    name: 'MySQL',
-    iconClass: 'devicon-mysql-original colored',
-  },
-  mongodb: {
-    id: 'mongodb',
-    name: 'MongoDB',
-    iconClass: 'devicon-mongodb-plain colored',
-  },
-  prisma: {
-    id: 'prisma',
-    name: 'Prisma',
-    iconClass: 'devicon-prisma-original colored',
-  },
-  sqlite: {
-    id: 'sqlite',
-    name: 'SQLite',
-    iconClass: 'devicon-sqlite-plain colored',
-  },
+  postgresql: defineIcon('postgresql', 'PostgreSQL', PostgresqlIcon),
+  mssql: defineIcon('mssql', 'MS SQL Server', SqlServerIcon),
+  mysql: defineIcon('mysql', 'MySQL', MySqlIcon),
+  mongodb: defineIcon('mongodb', 'MongoDB', MongoDbIcon),
+  prisma: defineIcon('prisma', 'Prisma', PrismaIcon),
+  sqlite: defineIcon('sqlite', 'SQLite', SqliteIcon),
 
   // Cloud / DevOps
-  azure: {
-    id: 'azure',
-    name: 'Azure',
-    iconClass: 'devicon-azure-plain colored',
-  },
-  docker: {
-    id: 'docker',
-    name: 'Docker',
-    iconClass: 'devicon-docker-plain colored',
-  },
-  maven: {
-    id: 'maven',
-    name: 'Maven',
-    iconClass: 'devicon-maven-plain colored',
-  },
+  azure: defineIcon('azure', 'Azure', AzureIcon),
+  docker: defineIcon('docker', 'Docker', DockerIcon),
+  maven: defineIcon('maven', 'Maven', MavenIcon),
 
   // Other
-  aframe: {
-    id: 'aframe',
-    name: 'AFrame',
-    iconClass: 'devicon-aframe-plain colored',
-  },
-  unity: {
-    id: 'unity',
-    name: 'Unity',
-    iconClass: 'devicon-unity-plain colored',
-  },
-  tauri: {
-    id: 'tauri',
-    name: 'Tauri',
-    iconClass: 'devicon-tauri-plain colored',
-  },
-  linkedin: {
-    id: 'linkedin',
-    name: 'LinkedIn',
-    iconClass: 'devicon-linkedin-plain colored',
-  },
-  'linkedin-colourless': {
-    id: 'linkedin-colourless',
-    name: 'LinkedIn',
-    iconClass: 'devicon-linkedin-plain',
-  },
-  github: {
-    id: 'github',
-    name: 'Github',
-    iconClass: 'devicon-github-original colored',
-  },
-  'github-colourless': {
-    id: 'github-colourless',
-    name: 'Github',
-    iconClass: 'devicon-github-original',
-  },
-  hardhat: {
-    id: 'hardhat',
-    name: 'Hardhat',
-    iconClass: 'devicon-hardhat-plain colored',
-  },
+  aframe: defineIcon('aframe', 'A-Frame', AframeIcon),
+  unity: defineIcon('unity', 'Unity', UnityIcon),
+  tauri: defineIcon('tauri', 'Tauri', TauriIcon),
+  linkedin: defineIcon('linkedin', 'LinkedIn', LinkedinIcon),
+  'linkedin-colourless': defineIcon(
+    'linkedin-colourless',
+    'LinkedIn',
+    LinkedinIconColourless,
+  ),
+  github: defineIcon('github', 'GitHub', GithubIcon),
+  'github-colourless': defineIcon(
+    'github-colourless',
+    'GitHub',
+    GithubIconColourless,
+  ),
+  hardhat: defineIcon('hardhat', 'Hardhat', HardhatIcon),
+  numpy: defineIcon('numpy', 'Numpy', NumpyIcon),
+  pandas: defineIcon('pandas', 'Pandas', PandasIcon),
+  streamlit: defineIcon('streamlit', 'Streamlit', StreamlitIcon),
 } as const;
 
 export type IconKey = keyof typeof icons;

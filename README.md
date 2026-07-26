@@ -17,7 +17,7 @@ technical skills, and contact information.
 ## Technology
 
 - **Frontend:** React 19, TypeScript, Vite, and Tailwind CSS
-- **UI:** Shadcn-style components, Radix UI, Lucide, and Devicon
+- **UI:** Shadcn-style components, Radix UI, Lucide, and inline Devicon SVGs
 - **Interaction:** Motion and Embla Carousel
 - **Backend:** Netlify Functions and Resend
 - **Quality:** ESLint, Prettier, strict TypeScript, and GitHub Actions

@@ -4,10 +4,10 @@ import { ArrowRight, Contact } from 'lucide-react';
 import { scrollToSection } from '@/util';
 import Section from '@/components/section';
 import AnimatedContent from '@/components/animated-content';
-import Icons from '@/util/icons';
-
-const linkedInIconClass = Icons['linkedin-colourless'].iconClass;
-const githubIconClass = Icons['github-colourless'].iconClass;
+import {
+  GithubIconColourless,
+  LinkedinIconColourless,
+} from '@/components/icons';
 
 const linkedInProfileUrl = 'https://www.linkedin.com/in/rohit-kisto/';
 const githubProfileUrl = 'https://github.com/rohitrtk';
@@ -72,7 +72,12 @@ const Hero = () => {
         </div>
 
         <div className="flex items-center gap-3">
-          <Button asChild variant="outline" size="icon-responsive">
+          <Button
+            asChild
+            variant="outline"
+            size="icon-responsive"
+            className="hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
+          >
             <a
               href={linkedInProfileUrl}
               target="_blank"
@@ -80,11 +85,19 @@ const Hero = () => {
               aria-label="View Rohit Kisto on LinkedIn"
               title="LinkedIn"
             >
-              <i className={`${linkedInIconClass} text-2xl`} />
+              <LinkedinIconColourless
+                aria-hidden="true"
+                className="size-7 fill-current sm:size-8"
+              />
             </a>
           </Button>
 
-          <Button asChild variant="outline" size="icon-responsive">
+          <Button
+            asChild
+            variant="outline"
+            size="icon-responsive"
+            className="hover:border-emerald-500 hover:bg-emerald-500/10 hover:text-emerald-600 dark:hover:text-emerald-400"
+          >
             <a
               href={githubProfileUrl}
               target="_blank"
@@ -92,7 +105,10 @@ const Hero = () => {
               aria-label="View Rohit Kisto on GitHub"
               title="GitHub"
             >
-              <i className={`${githubIconClass} text-2xl`} />
+              <GithubIconColourless
+                aria-hidden="true"
+                className="size-7 fill-current sm:size-8"
+              />
             </a>
           </Button>
         </div>
