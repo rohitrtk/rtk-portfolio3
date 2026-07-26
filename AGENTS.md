@@ -24,10 +24,11 @@ These instructions apply to the entire repository.
 - `src/app.tsx` defines the page composition.
 - `src/sections/` contains the major page sections.
 - `src/components/` contains shared portfolio components.
+- `src/components/icons/index.tsx` contains inline SVG technology icons.
 - `src/components/ui/` contains reusable Shadcn/Radix UI primitives.
 - `src/data/projects.ts` is the source of truth for portfolio project cards.
 - `src/types/project.ts` defines project and gallery image shapes.
-- `src/util/icons.ts` maps technology keys to Devicon classes.
+- `src/util/icons.ts` maps technology keys to SVG icon components.
 - `src/context/theme-provider.tsx` owns theme state and persistence.
 - `src/styles/tailwind.css` contains global tokens and theme variables.
 - `public/projects/<slug>/` contains project gallery assets.
@@ -62,8 +63,9 @@ These instructions apply to the entire repository.
 
 - Add project content in `src/data/projects.ts`; do not hard-code project cards
   in the section component.
-- Use only keys declared by `IconKey` in `src/util/icons.ts`. Add a typed icon
-  mapping there when a required technology is missing.
+- Use only keys declared by `IconKey` in `src/util/icons.ts`. When a technology
+  is missing, add its SVG component in `src/components/icons/index.tsx` and add
+  the typed mapping in `src/util/icons.ts`.
 - Store screenshots as optimized web assets under
   `public/projects/<project-slug>/`.
 - Provide a meaningful `alt` value for every cover and gallery image. Add a

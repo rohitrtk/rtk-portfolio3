@@ -21,9 +21,9 @@ const Tags = ({ tags }: Props) => {
   const tagList = (
     <div className="mt-2 flex flex-wrap gap-2">
       {tags.map((tag) => {
-        const { id, name, iconClass } = Icons[tag];
+        const { id, name, icon } = Icons[tag];
 
-        return <Tag key={id} name={name} icon={iconClass} />;
+        return <Tag key={id} name={name} icon={icon} />;
       })}
     </div>
   );

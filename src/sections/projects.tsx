@@ -6,6 +6,8 @@ import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import ProjectGallery from '@/components/project-gallery';
 import { projects } from '@/data/projects';
+import type { Project } from '@/types/project';
+import { GithubIcon } from '@/components/icons';
 
 const Projects = () => {
   return (
@@ -24,7 +26,7 @@ const Projects = () => {
         <Separator className="mb-16" />
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project) => (
+          {projects.map((project: Project) => (
             <article
               key={project.title}
               className="group flex flex-col overflow-hidden rounded-xl border border-muted bg-card transition-all hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5"
@@ -43,16 +45,8 @@ const Projects = () => {
                     {project.title}
                   </h3>
 
-                  {project.proprietary ? (
-                    <span
-                      className="shrink-0 text-muted-foreground"
-                      title="This project is proprietary"
-                      aria-label="Proprietary project"
-                    >
-                      <LockIcon size={20} aria-hidden="true" />
-                    </span>
-                  ) : (
-                    project.link && (
+                  <div>
+                    {project.liveLink && (
                       <Button
                         asChild
                         variant="ghost"
@@ -60,16 +54,49 @@ const Projects = () => {
                         className="shrink-0"
                       >
                         <a
-                          href={project.link}
+                          href={project.liveLink}
                           target="_blank"
                           rel="noreferrer"
-                          aria-label={`Open ${project.title}`}
+                          aria-label={`Open ${project.liveLink}`}
                         >
                           <ExternalLink size={20} aria-hidden="true" />
                         </a>
                       </Button>
-                    )
-                  )}
+                    )}
+
+                    {project.proprietary ? (
+                      <span
+                        className="shrink-0 text-muted-foreground"
+                        title="This project is proprietary"
+                        aria-label="Proprietary project"
+                      >
+                        <LockIcon size={20} aria-hidden="true" />
+                      </span>
+                    ) : (
+                      project.link && (
+                        <Button
+                          asChild
+                          variant="ghost"
+                          size="icon"
+                          className="shrink-0"
+                        >
+                          <a
+                            href={project.link}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`Open ${project.title}`}
+                          >
+                            <span
+                              aria-hidden="true"
+                              className="inline-flex items-center justify-center size-10 [&>svg]:size-full [&_path]:fill-current"
+                            >
+                              <GithubIcon />
+                            </span>
+                          </a>
+                        </Button>
+                      )
+                    )}
+                  </div>
                 </div>
 
                 <p className="mb-6 mt-3 leading-relaxed text-muted-foreground">

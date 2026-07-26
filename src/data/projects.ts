@@ -5,7 +5,7 @@ export const projects = [
     title: 'MapleRoom',
     description:
       'A local-first TFSA planner that estimates contribution room, charts saving activity, and manages contributions, withdrawals, CSV imports, and recurring schedules with data stored in SQLite.',
-    tags: ['react', 'typescript', 'tailwind', 'python', 'sqlite'],
+    tags: ['react', 'typescript', 'tailwind', 'python', 'fastapi', 'sqlite'],
     link: 'https://github.com/rohitrtk/maple-room',
     coverImage: {
       src: '/projects/maple-room/maple-room-1.webp',
@@ -73,7 +73,7 @@ export const projects = [
     title: 'Opening Bell',
     description:
       'A pre-market research dashboard that turns recent financial news and market data into a ranked watchlist of stocks and ETFs, with attention, direction, and confidence signals.',
-    tags: ['react', 'typescript', 'tailwind', 'python'],
+    tags: ['react', 'typescript', 'tailwind', 'python', 'fastapi'],
     link: 'https://github.com/rohitrtk/opening-bell',
     coverImage: {
       src: '/projects/opening-bell/opening-bell-1.webp',
@@ -110,6 +110,45 @@ export const projects = [
         alt: 'Opening Bell six-month candlestick chart',
         caption:
           'A six-month daily candlestick chart provides price context for each news-derived signal.',
+      },
+    ],
+  },
+  {
+    title: 'Asset Comparison Tool',
+    description:
+      "A visual tool for comparing the returns and other metrics of assets such as stocks, etf's or cryptocurrencies. All data is downloaded from Yahoo finance and aggregated to display weekly return data.",
+    tags: ['python', 'numpy', 'pandas', 'streamlit'],
+    link: 'https://github.com/rohitrtk/asset-comparison-tool',
+    liveLink: 'https://asset-comparison-tool.streamlit.app/',
+    coverImage: {
+      src: '/projects/asset-comparison-tool/asset-comparison-tool-1.webp',
+      alt: 'Asset comparison tool displaying a list of assets, their returns, and other metrics',
+      position: 'top',
+    },
+    images: [
+      {
+        src: '/projects/asset-comparison-tool/asset-comparison-tool-1.webp',
+        alt: 'Asset comparison tool displaying a list of assets, their returns, and other metrics',
+        caption:
+          'The tool displays a sidebar with options for choosing the asset tickers, initial investment amount, and other configurable options. The chosen tickers are downloaded via Yahoo finance and displayed in the summary table.',
+      },
+      {
+        src: '/projects/asset-comparison-tool/asset-comparison-tool-2.webp',
+        alt: "Asset comparison tool showing the growth tab's line chart for comparing chosen assets",
+        caption:
+          'The growth tab displays a layered and interactive linechart for comparing the return rate between all of the specified assets.',
+      },
+      {
+        src: '/projects/asset-comparison-tool/asset-comparison-tool-3.webp',
+        alt: "Asset comparison tool showing the drawdown tab's line chart for comparing drawdowns",
+        caption:
+          "The drawndown tab displays a layered and interactive linechart for comparing the drawdown's of all the assets.",
+      },
+      {
+        src: '/projects/asset-comparison-tool/asset-comparison-tool-4.webp',
+        alt: 'Asset comparison tool showing a table of price data on the weekly prices tab',
+        caption:
+          'The weekly prices tab simply displays a table of the weekly price data of all of the specified assets.',
       },
     ],
   },
@@ -222,13 +261,6 @@ export const projects = [
           'The individual block inspector displays the transactions and metadata contained in a block.',
       },
     ],
-  },
-  {
-    title: 'SQL Release Note Tool',
-    description:
-      'Written as part of a yearly competition at Kenna, two colleagues and I created a desktop application that assists with creating release notes used to move SQL code through our deployment environments.',
-    tags: ['tauri', 'rust', 'react', 'typescript', 'tailwind', 'mssql'],
-    proprietary: true,
   },
   {
     title: 'Instagram 4 Pomeranians',

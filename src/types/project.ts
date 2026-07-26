@@ -16,4 +16,5 @@ export type Project = {
   images?: ProjectImage[];
   link?: string;
   proprietary?: boolean;
+  liveLink?: string;
 };

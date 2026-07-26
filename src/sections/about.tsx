@@ -50,10 +50,8 @@ const About = () => {
             <h3 className="text-xl mb-4 tracking-tight">Core Skills</h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
               {coreSkills.map((skill) => {
-                const { id, name, iconClass } = Icons[skill];
-                return (
-                  <Tag key={id} name={name} icon={iconClass} variant="large" />
-                );
+                const { id, name, icon } = Icons[skill];
+                return <Tag key={id} name={name} icon={icon} variant="large" />;
               })}
             </div>
           </div>
