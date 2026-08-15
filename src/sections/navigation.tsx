@@ -1,25 +1,72 @@
-import { useEffect, useRef, useState } from 'react';
-import { useTheme } from '@/context/theme-provider';
-import { Button } from '@/components/ui/button';
-import { Separator } from '@/components/ui/separator';
-import { Menu, Moon, Sun, X } from 'lucide-react';
-import { scrollToSection } from '@/util';
+import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
+import { useEffect, useRef, useState } from 'react';
+
+import {
+  GithubIconColourless,
+  LinkedinIconColourless,
+} from '@/components/icons';
 import Logo from '@/components/logo';
+import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-is-mobile';
+import { scrollToSection } from '@/util';
+
+const linkedInProfileUrl = 'https://www.linkedin.com/in/rohit-kisto/';
+const githubProfileUrl = 'https://github.com/rohitrtk';
 
 const items = [
   { id: 'projects', text: 'Projects' },
-  { id: 'journey', text: 'Journey' },
-  { id: 'about', text: 'About' },
   { id: 'contact', text: 'Contact' },
 ];
+
+const SocialLinks = () => (
+  <div className="flex items-center gap-1">
+    <Button
+      asChild
+      variant="ghost"
+      size="icon"
+      className="hover:bg-transparent hover:text-primary"
+    >
+      <a
+        href={githubProfileUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="View Rohit Kisto on GitHub"
+        title="GitHub"
+      >
+        <GithubIconColourless
+          aria-hidden="true"
+          className="size-5 fill-current"
+        />
+      </a>
+    </Button>
+
+    <Button
+      asChild
+      variant="ghost"
+      size="icon"
+      className="hover:bg-transparent hover:text-primary"
+    >
+      <a
+        href={linkedInProfileUrl}
+        target="_blank"
+        rel="noreferrer"
+        aria-label="View Rohit Kisto on LinkedIn"
+        title="LinkedIn"
+      >
+        <LinkedinIconColourless
+          aria-hidden="true"
+          className="size-5 fill-current"
+        />
+      </a>
+    </Button>
+  </div>
+);
 
 const Navigation = () => {
   const [open, setOpen] = useState<boolean>(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
 
-  const { isDark, toggleTheme } = useTheme();
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -55,33 +102,12 @@ const Navigation = () => {
           key={id}
           type="button"
           variant="ghost"
-          className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+          className="justify-start hover:bg-transparent hover:text-primary"
           onClick={() => handleNavItemClick(id)}
         >
           {text}
         </Button>
       ))}
-
-      <Separator className="my-2" />
-
-      <Button
-        type="button"
-        variant="ghost"
-        className="justify-start hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
-        onClick={toggleTheme}
-      >
-        {isDark ? (
-          <>
-            Light Mode
-            <Sun data-icon="inline-end" size={20} />
-          </>
-        ) : (
-          <>
-            Dark Mode
-            <Moon data-icon="inline-end" size={20} />
-          </>
-        )}
-      </Button>
     </div>
   );
 
@@ -98,24 +124,15 @@ const Navigation = () => {
                 type="button"
                 variant="ghost"
                 onClick={() => handleNavItemClick(id)}
-                className="text-base hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+                className="text-base hover:bg-transparent hover:text-primary"
               >
                 {text}
               </Button>
             ))}
 
-            <Button
-              type="button"
-              variant="ghost"
-              size="icon"
-              onClick={toggleTheme}
-              className="hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
-              aria-label={
-                isDark ? 'Switch to light mode' : 'Switch to dark mode'
-              }
-            >
-              {isDark ? <Sun size={20} /> : <Moon size={20} />}
-            </Button>
+            <div className="ml-2 border-l pl-2">
+              <SocialLinks />
+            </div>
           </div>
         </div>
 
@@ -125,17 +142,23 @@ const Navigation = () => {
         >
           <Logo />
 
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon"
-            onClick={() => setOpen((previous) => !previous)}
-            className="hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
-            aria-label={open ? 'Close navigation menu' : 'Open navigation menu'}
-            aria-expanded={open}
-          >
-            {open ? <X size={20} /> : <Menu size={20} />}
-          </Button>
+          <div className="flex items-center gap-1">
+            <SocialLinks />
+
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon"
+              onClick={() => setOpen((previous) => !previous)}
+              className="hover:bg-transparent hover:text-primary"
+              aria-label={
+                open ? 'Close navigation menu' : 'Open navigation menu'
+              }
+              aria-expanded={open}
+            >
+              {open ? <X size={20} /> : <Menu size={20} />}
+            </Button>
+          </div>
         </div>
         {isMobile ? (
           open && (

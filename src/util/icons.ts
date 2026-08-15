@@ -1,4 +1,3 @@
-import type { ComponentType } from 'react';
 import {
   AframeIcon,
   AzureIcon,
@@ -42,6 +41,7 @@ import {
   TypescriptIcon,
   UnityIcon,
 } from '@/components/icons';
+import type { ComponentType } from 'react';
 
 const defineIcon = <const Id extends string>(
   id: Id,

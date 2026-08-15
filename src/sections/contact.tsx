@@ -1,7 +1,9 @@
 import { Send } from 'lucide-react';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
-import Section from '@/components/section';
+import { toast } from 'sonner';
+
 import AnimatedContent from '@/components/animated-content';
+import Section from '@/components/section';
 import { Button } from '@/components/ui/button';
 import {
   Field,
@@ -13,7 +15,6 @@ import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { Spinner } from '@/components/ui/spinner';
 import { Textarea } from '@/components/ui/textarea';
-import { toast } from 'sonner';
 
 const initialFormData = {
   name: '',
@@ -83,60 +84,50 @@ const Contact = () => {
 
   return (
     <Section id="contact">
-      <div
-        aria-hidden={true}
-        className="absolute pointer-events-none top-0 right-0 w-96 h-96 blur-3xl opacity-10 bg-purple-400 dark:bg-purple-500"
-      />
-      <div
-        aria-hidden={true}
-        className="absolute pointer-events-none bottom-0 left-1/3 w-150 h-48 blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500"
-      />
-
-      <AnimatedContent>
-        <h2 className="text-4xl md:text-5xl mb-4 tracking-tight">
+      <AnimatedContent className="section-card">
+        <h2 className="text-4xl md:text-5xl mb-6 tracking-tight">
           Get in Touch
         </h2>
-        <Separator className="mb-16" />
+        <Separator className="mb-6" />
 
         <p className="text-lg mb-12 leading-relaxed">
           Have a question or just something to say? Send me a message and I'll
           get back to you soon.
         </p>
 
-        <form
-          onSubmit={handleSubmit}
-          className="flex w-full max-w-xl flex-col gap-6"
-        >
+        <form onSubmit={handleSubmit} className="flex w-full flex-col gap-6">
           <FieldGroup>
-            <Field>
-              <FieldLabel htmlFor="name">Name</FieldLabel>
-              <Input
-                id="name"
-                name="name"
-                type="text"
-                autoComplete="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                disabled={sending}
-                placeholder="Your name..."
-              />
-            </Field>
+            <div className="grid sm:grid-cols-2 grid-cols-1 gap-6">
+              <Field>
+                <FieldLabel htmlFor="name">Name</FieldLabel>
+                <Input
+                  id="name"
+                  name="name"
+                  type="text"
+                  autoComplete="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  disabled={sending}
+                  placeholder="Your name..."
+                />
+              </Field>
 
-            <Field>
-              <FieldLabel htmlFor="email">Email</FieldLabel>
-              <Input
-                id="email"
-                name="email"
-                type="email"
-                autoComplete="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                disabled={sending}
-                placeholder="Your email..."
-              />
-            </Field>
+              <Field>
+                <FieldLabel htmlFor="email">Email</FieldLabel>
+                <Input
+                  id="email"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  disabled={sending}
+                  placeholder="Your email..."
+                />
+              </Field>
+            </div>
 
             <Field>
               <FieldLabel htmlFor="message">Message</FieldLabel>
@@ -163,7 +154,7 @@ const Contact = () => {
             size="responsive"
             type="submit"
             disabled={sending}
-            className="w-full flex gap-1 sm:w-auto"
+            className="button-accent flex w-full gap-1 sm:w-auto"
           >
             {sending ? (
               <Spinner data-icon="inline-start" />

@@ -1,14 +1,12 @@
 import { MotionConfig } from 'motion/react';
-import { useIsMobile } from '@/hooks/use-is-mobile';
 
-import Navigation from '@/sections/navigation';
-import Hero from '@/sections/hero';
-import Projects from '@/sections/projects';
-import Journey from '@/sections/journey';
-import About from '@/sections/about';
+import { Toaster } from '@/components/ui/sonner';
+import { useIsMobile } from '@/hooks/use-is-mobile';
 import Contact from '@/sections/contact';
 import Footer from '@/sections/footer';
-import { Toaster } from './components/ui/sonner';
+import Hero from '@/sections/hero';
+import Navigation from '@/sections/navigation';
+import Projects from '@/sections/projects';
 
 const App = () => {
   const isMobile = useIsMobile();
@@ -21,8 +19,6 @@ const App = () => {
         <main>
           <Hero />
           <Projects />
-          <Journey />
-          <About />
           <Contact />
         </main>
 

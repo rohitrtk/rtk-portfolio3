@@ -1,35 +1,27 @@
 import { ExternalLink, LockIcon } from 'lucide-react';
-import Section from '@/components/section';
+
 import AnimatedContent from '@/components/animated-content';
+import { GithubIcon } from '@/components/icons';
+import ProjectGallery from '@/components/project-gallery';
+import Section from '@/components/section';
 import Tags from '@/components/tags';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
-import ProjectGallery from '@/components/project-gallery';
 import { projects } from '@/data/projects';
 import type { Project } from '@/types/project';
-import { GithubIcon } from '@/components/icons';
 
 const Projects = () => {
   return (
     <Section id="projects">
-      <div
-        aria-hidden={true}
-        className="absolute pointer-events-none top-1/4 left-0 w-96 h-96 rounded-full blur-3xl opacity-10 bg-emerald-400 dark:bg-emerald-500"
-      />
-      <div
-        aria-hidden={true}
-        className="absolute pointer-events-none bottom-1/4 right-0 w-125 h-125 rounded-full blur-3xl opacity-10 bg-cyan-400 dark:bg-cyan-500"
-      />
-
-      <AnimatedContent>
-        <h2 className="mb-4 text-4xl tracking-tight md:text-5xl">Projects</h2>
-        <Separator className="mb-16" />
+      <AnimatedContent className="section-card">
+        <h2 className="mb-6 text-4xl tracking-tight md:text-5xl">Projects</h2>
+        <Separator className="mb-6" />
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects.map((project: Project) => (
             <article
               key={project.title}
-              className="group flex flex-col overflow-hidden rounded-xl border border-muted bg-card transition-all hover:border-emerald-600/50 hover:shadow-lg hover:shadow-emerald-600/5"
+              className="group flex flex-col overflow-hidden border border-border bg-background transition-[border-color,box-shadow] hover:border-primary/60 hover:shadow-lg hover:shadow-primary/5"
             >
               {project.coverImage && (
                 <ProjectGallery

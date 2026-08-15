@@ -1,7 +1,7 @@
 # Rohit Kisto Portfolio
 
 Source code for [rohitkisto.dev](https://rohitkisto.dev), a responsive
-single-page portfolio showcasing Rohit Kisto's projects, professional journey,
+single-page portfolio showcasing Rohit Kisto's projects,
 technical skills, and contact information.
 
 ## Highlights

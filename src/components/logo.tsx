@@ -7,7 +7,7 @@ const Logo = () => {
       type="button"
       variant="ghost"
       onClick={() => scrollToSection('hero')}
-      className="text-xl tracking-tight hover:bg-transparent hover:text-emerald-500 dark:hover:text-emerald-400"
+      className="text-xl tracking-tight hover:bg-transparent hover:text-primary"
     >
       rohitkisto.dev
     </Button>
