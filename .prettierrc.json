@@ -7,5 +7,6 @@
   "arrowParens": "always",
   "jsxSingleQuote": false,
   "bracketSameLine": false,
-  "endOfLine": "lf"
+  "endOfLine": "lf",
+  "plugins": ["prettier-plugin-organize-imports"]
 }

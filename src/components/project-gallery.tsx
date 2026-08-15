@@ -1,6 +1,6 @@
+import { Loader2, Maximize2 } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
-import { Maximize2 } from 'lucide-react';
-import { Skeleton } from '@/components/ui/skeleton';
+
 import {
   type CarouselApi,
   Carousel,
@@ -17,6 +17,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { type ProjectImage } from '@/types/project';
 
@@ -226,7 +227,7 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
                 return (
                   <CarouselItem key={image.src} className="min-w-0 pl-0">
                     <figure className="flex flex-col gap-3">
-                      <div className="relative flex h-[55dvh] items-center justify-center overflow-hidden rounded-lg bg-muted/40 sm:h-[64dvh] lg:h-[68dvh]">
+                      <div className="relative flex h-[55dvh] items-center justify-center overflow-hidden bg-muted/40 sm:h-[64dvh] lg:h-[68dvh]">
                         {!loaded && !failed && <ImageLoadingPlaceholder />}
 
                         {failed && (
@@ -298,9 +299,9 @@ const ProjectGallery = ({ title, coverImage, images }: ProjectGalleryProps) => {
                       type="button"
                       onClick={() => api?.scrollTo(index)}
                       className={cn(
-                        'h-2 rounded-full transition-all',
+                        'h-2 transition-all',
                         selected
-                          ? 'w-6 bg-emerald-500'
+                          ? 'w-6 bg-primary'
                           : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/60',
                       )}
                       aria-label={`View screenshot ${index + 1}`}
@@ -329,10 +330,10 @@ export default ProjectGallery;
 const ImageLoadingPlaceholder = () => {
   return (
     <div className="absolute inset-0 flex items-center justify-center p-4">
-      <Skeleton className="size-full rounded-lg" />
+      <Skeleton className="size-full" />
 
       <div className="absolute inset-0 flex flex-col items-center justify-center gap-3">
-        <span className="size-8 animate-spin rounded-full border-2 border-muted-foreground/20 border-t-emerald-500" />
+        <Loader2 className="size-8 animate-spin text-primary" />
 
         <span className="text-sm text-muted-foreground">
           Loading screenshot...

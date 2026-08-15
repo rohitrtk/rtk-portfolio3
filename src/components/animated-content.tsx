@@ -1,7 +1,8 @@
-import { cn } from '@/lib/utils';
-import { useIsMobile } from '@/hooks/use-is-mobile';
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
+
+import { useIsMobile } from '@/hooks/use-is-mobile';
+import { cn } from '@/lib/utils';
 
 type AnimatedContentProps = {
   children: ReactNode;
@@ -23,16 +24,16 @@ const AnimatedContent = ({ children, className }: AnimatedContentProps) => {
   return (
     <motion.div
       className={classes}
-      initial={{ opacity: 0, y: 24 }}
+      initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.6,
-        ease: 'easeInOut',
+        duration: 0.1,
+        ease: 'easeIn',
       }}
       viewport={{
         once: true,
         margin: '-100px',
-        amount: 0.05,
+        amount: 0.15,
       }}
     >
       {children}

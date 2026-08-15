@@ -1,5 +1,7 @@
 import type { IconKey } from '@/util/icons';
 
+export type Skill = IconKey;
+
 export type ProjectImage = {
   src: string;
   alt: string;
@@ -11,7 +13,7 @@ export type ProjectImage = {
 export type Project = {
   title: string;
   description: string;
-  tags: IconKey[];
+  tags: Skill[];
   coverImage?: ProjectImage;
   images?: ProjectImage[];
   link?: string;

@@ -1,10 +1,11 @@
-import Icons, { type IconKey } from '@/util/icons';
 import { ChevronRight } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useState } from 'react';
+
 import Tag from '@/components/tag';
 import { useIsMobile } from '@/hooks/use-is-mobile';
 import { cn } from '@/lib/utils';
+import Icons, { type IconKey } from '@/util/icons';
 
 type Props = {
   tags: IconKey[];

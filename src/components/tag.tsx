@@ -9,7 +9,7 @@ type Props = {
 const Tag = ({ name, icon: Icon, variant = 'small' }: Props) => {
   return (
     <span
-      className={`${variant === 'large' ? 'px-4 py-3' : 'px-3 py-1'} flex items-center text-sm rounded-md bg-secondary/50 border border-secondary`}
+      className={`${variant === 'large' ? 'px-4 py-3' : 'px-3 py-1'} flex items-center border border-secondary bg-secondary/50 text-sm`}
     >
       {Icon && (
         <span
