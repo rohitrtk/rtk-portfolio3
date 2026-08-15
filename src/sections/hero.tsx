@@ -11,7 +11,7 @@ const Hero = () => {
     <Section id="hero" verticalPadding={false}>
       <AnimatedContent className="section-card">
         <div className="mb-8">
-          <h1 className="-ml-[0.04em] text-6xl tracking-tighter text-foreground md:text-7xl lg:text-8xl">
+          <h1 className="ml-[-0.04em] text-6xl tracking-tighter text-foreground md:text-7xl lg:text-8xl">
             Rohit Kisto
           </h1>
           <p className="text-md text-primary font-bold">

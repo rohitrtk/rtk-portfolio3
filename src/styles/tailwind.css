@@ -99,6 +99,40 @@
 }
 
 @layer components {
+  .logo-card {
+    position: relative;
+    display: flex;
+    width: 2.25rem;
+    height: 2.25rem;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -0.075em;
+    line-height: 1;
+    transition:
+      border-color 150ms ease,
+      background-color 150ms ease;
+  }
+
+  .logo-card::after {
+    position: absolute;
+    inset: 4px -4px -4px 4px;
+    pointer-events: none;
+    border-right: 2px solid var(--primary);
+    border-bottom: 2px solid var(--primary);
+    content: '';
+  }
+
+  .group\/button:hover .logo-card {
+    border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+    background: var(--accent);
+  }
+
   .button-accent {
     position: relative;
   }

@@ -6,10 +6,15 @@ const Logo = () => {
     <Button
       type="button"
       variant="ghost"
+      size="icon"
       onClick={() => scrollToSection('hero')}
-      className="text-xl tracking-tight hover:bg-transparent hover:text-primary"
+      className="size-11 overflow-visible p-0 hover:bg-transparent"
+      aria-label="Back to the top"
+      title="Rohit Kisto"
     >
-      rohitkisto.dev
+      <span aria-hidden="true" className="logo-card">
+        RK
+      </span>
     </Button>
   );
 };
