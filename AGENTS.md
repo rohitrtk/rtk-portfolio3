@@ -93,9 +93,9 @@ Run checks appropriate to the files changed. Before handing off a completed
 code change, run the full CI sequence when practical:
 
 ```powershell
-npm run lint
-npm run format:check
-npm run build
+pnpm run lint
+pnpm run format:check
+pnpm run build
 ```
 
 For documentation-only changes, at minimum run Prettier against the changed

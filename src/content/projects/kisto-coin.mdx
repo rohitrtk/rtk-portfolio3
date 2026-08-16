@@ -1,0 +1,123 @@
+## Overview
+
+Kisto Coin is an educational, account-based proof-of-work blockchain. It lets a
+user generate wallets, sign transfers, mine pending transactions into blocks,
+and inspect the resulting chain through a React interface backed by a Java API.
+
+I built it to understand the mechanics behind a blockchain by implementing the
+core operations directly rather than beginning with an existing chain or
+smart-contract platform.
+
+## The learning goal
+
+Terms such as wallets, signatures, mining, and chain validation can remain
+abstract when they are only consumed through a library. Kisto Coin turns those
+concepts into an end-to-end system where each action has a visible effect on
+the ledger.
+
+The project focuses on four questions:
+
+- How can a wallet prove that it authorized a transfer?
+- What makes a block satisfy proof of work?
+- How are account balances derived from transaction history?
+- How does changing one block invalidate the chain that follows it?
+
+## The solution
+
+### Wallet creation and local key ownership
+
+The frontend generates a secp256k1 key pair and derives a wallet address. The
+wallet collection is persisted in the browser so users can create identities
+and interact with the chain without an account system.
+
+![Kisto Coin wallet creation dialog](/projects/kisto-coin/kisto-coin-2.webp)
+
+_A generated key pair gives the user an address that can send and receive Kisto
+Coin._
+
+### Signed transactions
+
+Transfers are signed before they reach the API. The Java backend validates the
+sender, recipient, positive amount, available balance, and ECDSA signature
+before accepting a transaction into the pending pool.
+
+![Kisto Coin transfer form for sending funds between wallets](/projects/kisto-coin/kisto-coin-3.webp)
+
+_The transfer workflow connects a familiar form to public-key authorization and
+server-side transaction validation._
+
+### Configurable proof of work
+
+Mining creates a block containing pending transactions, a reference to the
+previous block, a timestamp, and a nonce. The nonce changes until the block hash
+satisfies the configured difficulty. A mining-reward transaction compensates
+the selected wallet.
+
+![Kisto Coin settings for mining difficulty and block reward](/projects/kisto-coin/kisto-coin-4.webp)
+
+_Changing the difficulty makes the cost of proof of work tangible during local
+experimentation._
+
+### Inspectable chain data
+
+The blockchain view exposes every block rather than treating the ledger as a
+black box. Selecting a block reveals its metadata and the transactions it
+contains.
+
+![Kisto Coin blockchain grid showing mined blocks](/projects/kisto-coin/kisto-coin-7.webp)
+
+_The grid shows how blocks form an ordered history._
+
+![Kisto Coin inspector displaying an individual block](/projects/kisto-coin/kisto-coin-8.webp)
+
+_The inspector connects the block hash, previous hash, proof-of-work nonce, and
+transactions._
+
+## Technical approach
+
+The frontend is built with React, TypeScript, Vite, and Tailwind CSS. Zustand
+persists locally generated wallets, while React Hook Form and Zod validate user
+input before requests are sent.
+
+The Spring Boot backend owns the pending-transaction pool and blockchain. Java
+and Bouncy Castle provide hashing, secp256k1 key handling, signature
+verification, mining, balance calculation, and full-chain validation.
+
+## Validation model
+
+Every normal transaction must have a valid signature matching its sender. The
+API also considers pending outgoing transfers when checking a balance, which
+prevents the same available funds from being queued more than once.
+
+Chain validation recalculates each block hash, checks its proof-of-work target,
+and verifies its link to the previous block. Modifying historical content would
+therefore change the block hash and break every subsequent link.
+
+## Security and scope
+
+Kisto Coin is deliberately an educational implementation rather than a
+production cryptocurrency:
+
+- wallets and private keys are stored locally in the browser;
+- the backend ledger is held in memory rather than durable storage;
+- there is one application server rather than a peer-to-peer network;
+- there is no distributed consensus, fork choice, or adversarial node model;
+- mining difficulty is configurable for demonstration rather than network
+  security.
+
+Making these boundaries explicit keeps the project useful as a teaching tool
+without implying production-grade custody or decentralization.
+
+## Outcome
+
+Building Kisto Coin made the relationship between signatures, balances,
+pending transactions, blocks, mining, and validation concrete. It also gave me
+experience coordinating a typed React client with a Java domain model whose
+rules need to remain authoritative on the server.
+
+## What I would improve next
+
+- Persist blocks and pending transactions across server restarts.
+- Add automated tests for tampering, replay, and insufficient-funds scenarios.
+- Visualize the exact block input and hash calculation during mining.
+- Add a small peer-to-peer simulation to explore consensus and competing chains.

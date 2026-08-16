@@ -1,16 +1,19 @@
-import { ExternalLink, LockIcon } from 'lucide-react';
+import { ArrowRight, ExternalLink, LockIcon } from 'lucide-react';
+import { Link, useLocation } from 'react-router';
 
-import AnimatedContent from '@/components/animated-content';
 import { GithubIcon } from '@/components/icons';
-import ProjectGallery from '@/components/project-gallery';
-import Section from '@/components/section';
-import Tags from '@/components/tags';
+import AnimatedContent from '@/components/shared/animated-content';
+import Section from '@/components/shared/section';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { projects } from '@/data/projects';
+import { cn } from '@/lib/utils';
 import type { Project } from '@/types/project';
+import { saveRouteScrollPosition } from '@/util/route-scroll';
 
 const Projects = () => {
+  const { key: locationKey } = useLocation();
+
   return (
     <Section id="projects">
       <AnimatedContent className="section-card">
@@ -24,11 +27,23 @@ const Projects = () => {
               className="group flex flex-col overflow-hidden border border-border bg-background transition-[border-color,box-shadow] hover:border-primary/60 hover:shadow-lg hover:shadow-primary/5"
             >
               {project.coverImage && (
-                <ProjectGallery
-                  title={project.title}
-                  coverImage={project.coverImage}
-                  images={project.images ?? []}
-                />
+                <div className="aspect-[16/10] w-full overflow-hidden border-b bg-muted/40">
+                  <img
+                    src={project.coverImage.src}
+                    alt={project.coverImage.alt}
+                    loading="lazy"
+                    decoding="async"
+                    className={cn(
+                      'h-full w-full transition-transform duration-500 group-hover:scale-[1.02]',
+                      project.coverImage.fit === 'contain'
+                        ? 'object-contain p-4'
+                        : 'object-cover',
+                    )}
+                    style={{
+                      objectPosition: project.coverImage.position,
+                    }}
+                  />
+                </div>
               )}
 
               <div className="flex flex-1 flex-col p-6 sm:p-8">
@@ -96,7 +111,20 @@ const Projects = () => {
                 </p>
 
                 <div className="mt-auto">
-                  <Tags tags={project.tags} />
+                  <Button
+                    asChild
+                    variant="outline"
+                    className="button-accent mt-6 gap-2"
+                  >
+                    <Link
+                      to={`/projects/${project.slug}`}
+                      state={{ fromProjects: true }}
+                      onClick={() => saveRouteScrollPosition(locationKey)}
+                    >
+                      Read more
+                      <ArrowRight aria-hidden="true" />
+                    </Link>
+                  </Button>
                 </div>
               </div>
             </article>

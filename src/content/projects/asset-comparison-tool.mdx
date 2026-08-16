@@ -1,0 +1,117 @@
+## Overview
+
+Asset Comparison Tool is a Streamlit application for comparing the historical
+performance and risk of stocks, ETFs, and cryptocurrencies. It normalizes each
+selection into a common currency and weekly time series so unlike assets can be
+evaluated on the same basis.
+
+## The problem
+
+Comparing two price charts is rarely enough to understand two investments.
+Assets may trade in different currencies, begin with very different prices, or
+have missing observations on different market calendars. A higher ending value
+also says little about the volatility or drawdowns experienced along the way.
+
+I built the tool to make a comparison repeatable and to keep the assumptions
+behind it visible.
+
+## The solution
+
+### One configurable comparison
+
+The sidebar controls the tickers, date range, initial investment, display
+currency, risk-free rate, and chart options. The summary table then presents
+returns and risk metrics for every selected asset.
+
+![Asset Comparison Tool summary with selected assets and performance metrics](/projects/asset-comparison-tool/asset-comparison-tool-1.webp)
+
+_A single set of controls drives the table and every chart in the analysis._
+
+### Growth of an equal investment
+
+Raw prices are converted into the value of an equal initial investment. This
+makes the result comparable even when the selected assets have very different
+starting prices.
+
+![Asset growth comparison displayed as an interactive line chart](/projects/asset-comparison-tool/asset-comparison-tool-2.webp)
+
+_Interactive zoom, restore, and export controls help inspect shorter periods
+without losing the full comparison._
+
+### Drawdown as a separate view of risk
+
+The drawdown view measures each asset relative to its previous peak. It exposes
+the depth and duration of losses that an ending-return figure can hide.
+
+![Asset drawdown comparison displayed as an interactive line chart](/projects/asset-comparison-tool/asset-comparison-tool-3.webp)
+
+_Linear and logarithmic views support assets with very different performance
+ranges._
+
+### Inspectable source data
+
+The normalized weekly observations remain available as a table rather than
+being hidden behind the visualizations.
+
+![Weekly normalized asset prices shown in a data table](/projects/asset-comparison-tool/asset-comparison-tool-4.webp)
+
+_The weekly-prices view makes the values used by the charts available for
+inspection._
+
+## Data methodology
+
+The application downloads adjusted close prices and currency metadata from
+Yahoo Finance. Prices are converted using historical foreign-exchange data when
+an asset does not match the selected display currency, then resampled to
+Friday-ended weekly observations.
+
+From that aligned dataset, the application calculates:
+
+- total and annualized return;
+- annualized volatility and Sharpe ratio;
+- maximum drawdown;
+- best, worst, and percentage of positive weeks;
+- observation count and the growth of the chosen initial investment.
+
+The risk-free rate is converted to a weekly equivalent before it is used in the
+Sharpe calculation. Keeping these transformations in a defined pipeline makes
+the results easier to reason about and test.
+
+## Shareable application state
+
+The full sidebar configuration is encoded in the URL. A comparison can be
+bookmarked or sent to another person without requiring an account or a hosted
+database. Opening the link restores the selected assets and analysis settings.
+
+## Technical approach
+
+Streamlit provides the application shell, while Pandas and NumPy handle time
+series alignment, currency conversion, and metric calculations. ECharts renders
+the interactive growth and drawdown charts. The calculation layer is separated
+from the interface so the data transformations can be covered with automated
+tests.
+
+## Key tradeoffs
+
+- Results depend on the coverage and correctness of Yahoo Finance data.
+- Weekly resampling makes long comparisons easier to read but removes intraday
+  and daily detail.
+- Historical currency conversion is more representative than using today's
+  exchange rate, although missing FX observations still require careful
+  alignment.
+- Metrics describe historical behavior and are not predictions of future
+  returns.
+
+## Outcome
+
+The finished application turns a list of tickers into a consistent,
+shareable comparison of growth and downside risk. It strengthened my work with
+financial time series, data normalization, and interfaces that expose their
+methodology rather than hiding it.
+
+## What I would improve next
+
+- Add portfolio weighting and periodic rebalancing scenarios.
+- Support benchmark-relative and rolling performance metrics.
+- Make missing-data and currency assumptions more prominent in the interface.
+- Add downloadable comparison reports.

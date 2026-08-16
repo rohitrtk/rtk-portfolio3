@@ -1,0 +1,108 @@
+## Overview
+
+Instagram 4 Pomeranians is a full-stack social photo application with one rule:
+every uploaded image must contain a Pomeranian. It recreates the core flow of a
+photo-sharing network while using image classification to enforce the theme at
+the upload boundary.
+
+## The problem
+
+Most social applications accept an upload first and rely on people to review
+it later. For a community built around one visual subject, I wanted to explore
+whether the application could evaluate an image before it became part of the
+feed.
+
+The project combines a familiar product problem—accounts, profiles, posts, and
+likes—with a less predictable one: interpreting the output of a machine-learning
+model inside a normal request lifecycle.
+
+## The solution
+
+### A familiar social workflow
+
+Users can create an account, sign in, upload a post, browse the feed, view user
+profiles, and like or unlike images. The interface uses a responsive feed and
+client-side state so authentication and social interactions remain consistent
+while navigating between pages.
+
+### Classification before publication
+
+When an image is uploaded, the API decodes the file and passes it through
+MobileNet using TensorFlow.js for Node. The classifier returns likely labels
+for the image. The request only proceeds to post creation when the predictions
+include Pomeranian; otherwise the temporary upload is removed and the client is
+asked to choose another image.
+
+This puts the rule in server middleware rather than relying on a browser-only
+check that could be bypassed.
+
+## Upload pipeline
+
+The post-creation request moves through a defined sequence:
+
+1. Multer accepts the multipart image upload.
+2. The API validates the request and decodes the temporary image.
+3. MobileNet classifies the image and returns its predictions.
+4. Non-matching uploads are deleted and rejected.
+5. Accepted images are stored in MongoDB GridFS.
+6. A post record is created and linked to the authenticated user.
+
+Handling cleanup in the rejection path is important. A failed classification
+should not leave unused files accumulating on the server.
+
+## Application architecture
+
+The client is built with Next.js, React, and TypeScript. Redux Toolkit and
+persisted state manage the active session and feed data, while React Hook Form,
+Yup, and Dropzone support validation and file selection.
+
+The Express and TypeScript API uses MongoDB and Mongoose for users and posts.
+GridFS stores uploaded images alongside the database, and JSON Web Tokens and
+bcrypt provide authenticated requests and password hashing. Helmet, CORS, and
+request logging cover the basic HTTP boundary.
+
+## Core data flows
+
+### Authentication
+
+Credentials are validated by the API and passwords are stored as hashes. The
+issued token identifies the user for protected routes such as creating a post
+or changing a like.
+
+### Feed and profiles
+
+Post routes support the main feed, posts for a particular user, and individual
+post views. User data and image responses are joined at the API boundary so the
+client can render authorship and social state consistently.
+
+### Likes
+
+Like requests toggle the current user's membership in a post's like collection.
+The server remains the source of truth, while client state updates the visible
+count and selected state.
+
+## Key tradeoffs
+
+- A general-purpose classifier can reject unusual or poorly lit Pomeranian
+  photos and accept visually similar breeds.
+- Requiring an exact model label is easy to reason about but less flexible than
+  applying a confidence threshold across related labels.
+- GridFS keeps images and application data in one persistence system, although
+  object storage would generally scale more independently.
+- Persisting session state improves navigation but requires care when tokens
+  expire or server-owned user data changes.
+
+## Outcome
+
+The project demonstrates a complete media workflow across browser forms,
+authentication, file uploads, database-backed images, social interactions, and
+server-side machine learning. Its constraint also made failure handling a
+first-class part of creating a post rather than an afterthought.
+
+## What I would improve next
+
+- Use confidence thresholds and breed aliases instead of one exact label.
+- Add a review path for likely false negatives.
+- Move image storage to an object store and generate optimized thumbnails.
+- Add pagination, optimistic updates, and stronger integration coverage for the
+  upload pipeline.

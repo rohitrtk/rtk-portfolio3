@@ -26,13 +26,13 @@ const AnimatedContent = ({ children, className }: AnimatedContentProps) => {
       initial={{ opacity: 0, y: 12 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{
-        duration: 0.1,
-        ease: 'easeIn',
+        duration: 0.35,
+        ease: 'backInOut',
       }}
       viewport={{
         once: true,
-        margin: '-100px',
-        amount: 0.15,
+        margin: '-200px',
+        amount: 'some',
       }}
     >
       {children}

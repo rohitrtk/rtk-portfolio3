@@ -11,6 +11,7 @@ export type ProjectImage = {
 };
 
 export type Project = {
+  slug: string;
   title: string;
   description: string;
   tags: Skill[];

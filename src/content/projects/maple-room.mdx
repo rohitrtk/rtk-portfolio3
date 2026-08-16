@@ -1,0 +1,126 @@
+## Overview
+
+MapleRoom is a local-first TFSA planning application for tracking contribution
+room, recording account activity, and understanding how current saving habits
+affect future contribution capacity.
+
+I built the project to bring calculations, transaction history, recurring
+contributions, and long-term planning into one focused workflow while keeping
+the underlying financial data stored locally.
+
+## The problem
+
+TFSA contribution room changes as people contribute, withdraw funds, and
+receive new room each year. Although the rules are straightforward in
+isolation, understanding the complete history can become difficult when
+activity is spread across multiple institutions, accounts or tracked manually.
+
+MapleRoom was designed around three questions:
+
+- How much estimated contribution room is currently available?
+- How quickly is that room being used?
+- What activity caused the estimate to change?
+
+## Goals
+
+- Keep personal financial activity under the user's control.
+- Make contribution-room estimates easy to understand at a glance.
+- Support both individual entries and larger CSV or batch imports.
+- Automate recurring contributions without creating duplicate activity.
+- Keep long histories searchable and manageable as the dataset grows.
+
+## The solution
+
+### A dashboard focused on contribution room
+
+The dashboard combines the current room estimate with annual summaries,
+monthly saving pace, and projections. This makes the most important information
+visible immediately while still providing enough context to understand the
+estimate.
+
+![MapleRoom dashboard showing estimated contribution room and annual summaries](/projects/maple-room/maple-room-1.webp)
+
+_The dashboard summarizes estimated room, recent activity, saving pace, and
+projected room exhaustion._
+
+### Flexible activity entry
+
+Contributions and withdrawals can be recorded manually or imported in batches.
+Entries can include dates, institutions, notes, and flags before being reviewed
+and saved together.
+
+![MapleRoom batch activity form containing multiple TFSA entries](/projects/maple-room/maple-room-5.webp)
+
+_The batch workflow allows multiple entries to be validated and reviewed before
+they are committed._
+
+### Recurring contribution schedules
+
+Users can define recurring contributions with an amount, contribution day,
+date range, institution, and optional notes. Due activity is added to the
+ledger exactly once, allowing schedules to be processed repeatedly without
+creating duplicates.
+
+![MapleRoom recurring contribution creation form](/projects/maple-room/maple-room-7.webp)
+
+_Recurring schedules capture the information needed to generate future ledger
+activity._
+
+### A searchable activity ledger
+
+The activity ledger brings manual, imported, and recurring entries together.
+Search, filtering, flags, row actions, and server-side pagination keep the
+history usable as more activity is recorded.
+
+![MapleRoom searchable TFSA activity ledger](/projects/maple-room/maple-room-8.webp)
+
+_The ledger provides a traceable history behind the contribution-room
+estimate._
+
+## Technical approach
+
+### Frontend
+
+The interface is built with React and TypeScript, with Tailwind CSS providing
+the visual system and responsive layouts. The frontend is responsible for the
+planning workflows, validation feedback, charts, and interaction with the API.
+
+### API and persistence
+
+FastAPI provides the application API, while SQLite stores profiles, account
+activity, and recurring schedules locally. This keeps deployment and data
+ownership simple while still allowing the frontend and backend to have a clear
+boundary.
+
+## Key engineering decisions
+
+### Local-first storage
+
+Financial activity is sensitive, so MapleRoom keeps its working dataset in a
+local SQLite database instead of requiring a hosted account or external cloud
+database.
+
+### Idempotent recurring activity
+
+Recurring schedules need to be safe to process more than once. Generated
+activity is therefore treated as an idempotent operation so that running the
+same schedule-processing logic cannot silently duplicate a contribution.
+
+### Server-side pagination
+
+Long activity histories are paginated by the server rather than loading the
+entire ledger into the browser. This keeps response sizes predictable and the
+interface responsive as the local dataset grows.
+
+## Outcome
+
+MapleRoom now provides one place to estimate contribution room, inspect the
+activity behind that estimate, and plan future saving activity without sending
+personal financial records to a hosted service.
+
+## What I would improve next
+
+- Add automated backups and a clear restore workflow.
+- Expand import reconciliation and duplicate detection.
+- Improve scenario planning for future contributions and withdrawals.
+- Add deeper automated coverage for contribution-room edge cases.

@@ -1,8 +1,8 @@
 import { Contact, Hammer } from 'lucide-react';
 
-import AnimatedContent from '@/components/animated-content';
-import RotatingDescriptor from '@/components/rotating-descriptor';
-import Section from '@/components/section';
+import AnimatedContent from '@/components/shared/animated-content';
+import RotatingDescriptor from '@/components/shared/rotating-descriptor';
+import Section from '@/components/shared/section';
 import { Button } from '@/components/ui/button';
 import { scrollToSection } from '@/util';
 
