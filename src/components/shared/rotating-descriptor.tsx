@@ -49,7 +49,7 @@ const RotatingDescriptor = () => {
         </span>
 
         <motion.span
-          className="absolute inset-0 z-10 bg-primary"
+          className="absolute inset-0 z-10 bg-muted"
           initial={false}
           animate={{ scaleX: phase === 'covering' ? 1 : 0 }}
           style={{
@@ -58,6 +58,7 @@ const RotatingDescriptor = () => {
           }}
           transition={{ duration: 0.25, ease: 'backInOut' }}
           onAnimationComplete={handleCurtainComplete}
+          aria-hidden={true}
         />
       </span>
 

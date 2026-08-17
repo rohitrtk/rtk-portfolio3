@@ -2,6 +2,7 @@ import type { Project } from '@/types/project';
 
 export const projects = [
   {
+    slug: 'maple-room',
     title: 'MapleRoom',
     description:
       'A local-first TFSA planner that estimates contribution room, charts saving activity, and manages contributions, withdrawals, CSV imports, and recurring schedules with data stored in SQLite.',
@@ -70,6 +71,7 @@ export const projects = [
     ],
   },
   {
+    slug: 'opening-bell',
     title: 'Opening Bell',
     description:
       'A pre-market research dashboard that turns recent financial news and market data into a ranked watchlist of stocks and ETFs, with attention, direction, and confidence signals.',
@@ -114,6 +116,7 @@ export const projects = [
     ],
   },
   {
+    slug: 'asset-comparison-tool',
     title: 'Asset Comparison Tool',
     description:
       "A visual tool for comparing the returns and other metrics of assets such as stocks, etf's or cryptocurrencies. All data is downloaded from Yahoo finance and aggregated to display weekly return data.",
@@ -153,6 +156,7 @@ export const projects = [
     ],
   },
   {
+    slug: 'filearn',
     title: 'FiLearn',
     description:
       'An online learning platform for finance and crypto. Completing quizzes rewards the user with FILEARN tokens.',
@@ -205,6 +209,7 @@ export const projects = [
     ],
   },
   {
+    slug: 'kisto-coin',
     title: 'Kisto Coin',
     description:
       'To learn more about blockchain, I created a bare-bones, account-based proof-of-work blockchain that allows users to create wallets and send Kisto Coins to one another.',
@@ -263,6 +268,7 @@ export const projects = [
     ],
   },
   {
+    slug: 'ig-4-pomeranians',
     title: 'Instagram 4 Pomeranians',
     description:
       'An Instagram clone with a twist: users can only upload pictures of my favourite dog breed, the Pomeranian. This is enforced through image recognition.',

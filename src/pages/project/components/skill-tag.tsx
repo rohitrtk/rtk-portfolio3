@@ -6,7 +6,7 @@ type Props = {
   variant?: 'large' | 'small';
 };
 
-const Tag = ({ name, icon: Icon, variant = 'small' }: Props) => {
+const SkillTag = ({ name, icon: Icon, variant = 'small' }: Props) => {
   return (
     <span
       className={`${variant === 'large' ? 'px-4 py-3' : 'px-3 py-1'} flex items-center border border-secondary bg-secondary/50 text-sm`}
@@ -24,4 +24,4 @@ const Tag = ({ name, icon: Icon, variant = 'small' }: Props) => {
   );
 };
 
-export default Tag;
+export default SkillTag;

@@ -1,0 +1,124 @@
+## Overview
+
+Opening Bell is a pre-market research dashboard that turns recent financial
+news and market data into a ranked watchlist of stocks and ETFs. It separates
+three ideas that are often conflated: how much attention a ticker is receiving,
+its likely direction, and the confidence behind that signal.
+
+The application is intended to help organize morning research. Its rankings
+surface candidates for further investigation rather than making price
+predictions or providing financial advice.
+
+## The problem
+
+Pre-market research requires moving between news feeds, quotes, charts, and
+company data while deciding which stories are actually material. A ticker can
+appear frequently without having a clear directional catalyst, and one strong
+headline can be less convincing than several independent sources reporting the
+same development.
+
+I wanted a workflow that could answer three questions quickly:
+
+- Which tickers are attracting meaningful attention this morning?
+- Does the available reporting suggest a positive, negative, or mixed catalyst?
+- What evidence contributed to the ranking?
+
+## The solution
+
+### A ranked morning brief
+
+The main dashboard summarizes the tone of recent market coverage and ranks the
+most relevant tickers. Each row keeps the core signal visible: recent price
+movement, attention, likely direction, confidence, and the leading catalyst.
+
+![Opening Bell watchlist displaying ranked tickers and signal methodology](/projects/opening-bell/opening-bell-2.webp)
+
+_The watchlist makes each part of the signal visible instead of collapsing the
+result into a single unexplained score._
+
+### Explainable signals
+
+Selecting a ticker opens a detailed view of the signal. The contributing news
+stories remain attached to the result so a user can inspect the evidence,
+compare sources, and decide whether the ranking deserves more research.
+
+![Opening Bell signal overview with contributing news stories](/projects/opening-bell/opening-bell-3.webp)
+
+_The overview connects a ticker's position in the watchlist to the articles
+that influenced it._
+
+### Market and technical context
+
+A signal is more useful when it can be viewed alongside the underlying asset.
+Opening Bell combines company information, valuation and volume metrics, daily
+ranges, and price history in the same drawer.
+
+![Opening Bell technical metrics for a selected ticker](/projects/opening-bell/opening-bell-4.webp)
+
+_Technical and company metrics provide context without interrupting the morning
+research workflow._
+
+![Opening Bell six-month candlestick chart](/projects/opening-bell/opening-bell-5.webp)
+
+_A six-month candlestick chart makes it easier to compare a new catalyst with
+the ticker's recent price action._
+
+## Signal pipeline
+
+The API groups recent articles by ticker, removes unsupported or low-relevance
+items, and scores the remaining coverage using several factors:
+
+- article recency and ticker relevance;
+- the number and breadth of reporting sources;
+- sentiment direction and intensity;
+- the concentration of positive, negative, or mixed coverage.
+
+Attention, direction, and confidence are calculated separately. This prevents
+a heavily discussed company from automatically being presented as a strong
+directional opportunity.
+
+## Technical approach
+
+The React and TypeScript frontend uses a focused dashboard layout, interactive
+charts, and a lazily loaded candlestick chart. A FastAPI backend handles news
+aggregation, signal calculation, market-data retrieval, and response
+validation.
+
+The backend combines news and sentiment data with quotes, profiles, and
+historical candles. Price history is requested in bulk where possible to avoid
+performing a separate network request for every ticker in the watchlist.
+
+## Reliability and performance
+
+External market-data providers can be slow or temporarily unavailable, so the
+application applies different cache windows to news, quotes, candles, and
+company profiles. Concurrent requests share in-flight work through asynchronous
+locks, which prevents a dashboard refresh from producing duplicate upstream
+requests.
+
+When fresh data is unavailable, the API can fall back to recent cached data or
+a demo response. The interface communicates the data source so degraded
+operation does not look like a live market result.
+
+## Key tradeoffs
+
+- News sentiment is an input to research, not a forecast of future returns.
+- Source coverage and provider limits can affect which tickers are surfaced.
+- A simple, explainable scoring model is easier to inspect than an opaque model,
+  but it still requires judgment from the user.
+- Caching improves reliability, while accepting that some views may be several
+  minutes behind the latest provider response.
+
+## Outcome
+
+Opening Bell brings discovery, evidence, company context, and price history
+into one pre-market workflow. The project also gave me an opportunity to design
+an explainable ranking system and build a resilient integration around
+rate-limited third-party financial data.
+
+## What I would improve next
+
+- Add saved watchlists and configurable signal thresholds.
+- Track how signals change throughout a trading session.
+- Expand provider fallbacks and data-quality monitoring.
+- Add historical evaluation tools without presenting past results as predictive.

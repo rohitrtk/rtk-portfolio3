@@ -1,15 +1,15 @@
 import { Menu, X } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router';
 
 import {
   GithubIconColourless,
   LinkedinIconColourless,
 } from '@/components/icons';
-import Logo from '@/components/logo';
+import Logo from '@/components/shared/logo';
 import { Button } from '@/components/ui/button';
 import { useIsMobile } from '@/hooks/use-is-mobile';
-import { scrollToSection } from '@/util';
 
 const linkedInProfileUrl = 'https://www.linkedin.com/in/rohit-kisto/';
 const githubProfileUrl = 'https://github.com/rohitrtk';
@@ -86,26 +86,18 @@ const Navigation = () => {
     };
   }, [open]);
 
-  const handleNavItemClick = (id: string) => {
-    if (open) {
-      setOpen(false);
-      setTimeout(() => scrollToSection(id), 100);
-    } else {
-      scrollToSection(id);
-    }
-  };
-
   const menuContent = (
     <div className="flex flex-col gap-1 px-4 py-4">
       {items.map(({ id, text }) => (
         <Button
           key={id}
-          type="button"
+          asChild
           variant="ghost"
           className="justify-start hover:bg-transparent hover:text-primary"
-          onClick={() => handleNavItemClick(id)}
         >
-          {text}
+          <Link to={`/#${id}`} onClick={() => setOpen(false)}>
+            {text}
+          </Link>
         </Button>
       ))}
     </div>
@@ -121,12 +113,11 @@ const Navigation = () => {
             {items.map(({ id, text }) => (
               <Button
                 key={id}
-                type="button"
+                asChild
                 variant="ghost"
-                onClick={() => handleNavItemClick(id)}
                 className="text-base hover:bg-transparent hover:text-primary"
               >
-                {text}
+                <Link to={`/#${id}`}>{text}</Link>
               </Button>
             ))}
 

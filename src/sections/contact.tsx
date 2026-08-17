@@ -2,8 +2,8 @@ import { Send } from 'lucide-react';
 import { useState, type ChangeEvent, type FormEvent } from 'react';
 import { toast } from 'sonner';
 
-import AnimatedContent from '@/components/animated-content';
-import Section from '@/components/section';
+import AnimatedContent from '@/components/shared/animated-content';
+import Section from '@/components/shared/section';
 import { Button } from '@/components/ui/button';
 import {
   Field,

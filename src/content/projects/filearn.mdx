@@ -1,0 +1,123 @@
+## Overview
+
+FiLearn is a finance and cryptocurrency learning platform built around short
+modules, quizzes, and verifiable completion rewards. Users work through written
+lessons, test their understanding, connect a wallet, and can claim FILEARN
+tokens on Ethereum Sepolia after completing a module.
+
+## The problem
+
+Finance and blockchain material is often either too broad for a beginner or
+spread across disconnected articles. Passive reading also provides little
+feedback about whether the material was understood.
+
+FiLearn combines structured content, assessment, progress tracking, and an
+optional on-chain reward in a single learning loop.
+
+## The learning experience
+
+### A progress-focused dashboard
+
+After signing in, learners can browse modules across traditional finance,
+decentralized finance, and cryptocurrency fundamentals. The dashboard shows
+which modules have been attempted or completed.
+
+![FiLearn dashboard containing finance learning modules](/projects/fi-learn/fi-learn-2.webp)
+
+_The dashboard acts as the starting point for the learner's module progress._
+
+### Content authored with MDX
+
+Lessons are written as MDX so long-form explanations can sit alongside custom
+React components, formatted equations, and reusable callouts. This keeps the
+learning content maintainable without forcing every lesson into a database or
+hard-coded page component.
+
+![FiLearn lesson explaining the purpose of mutual funds](/projects/fi-learn/fi-learn-4.webp)
+
+_Each module breaks the topic into readable sections before asking the learner
+to complete an assessment._
+
+![FiLearn lesson section describing mutual fund investing](/projects/fi-learn/fi-learn-5.webp)
+
+_The same content system supports structured explanations and consistent
+visual presentation across modules._
+
+### Server-graded quizzes
+
+Every module ends with a quiz. Answers are submitted to the server for grading
+rather than trusting a score calculated by the browser.
+
+![FiLearn quiz for the mutual funds module](/projects/fi-learn/fi-learn-7.webp)
+
+_Quiz results update the learner's attempt history, best score, and completion
+status._
+
+## Reward flow
+
+Completing a module unlocks an optional token reward. The claim endpoint checks
+that the request is authenticated, the submitted wallet is valid, the module
+has been completed, and the reward has not already been claimed. Only after
+those conditions pass does the server request a token mint and store the
+resulting transaction hash and reward wallet.
+
+The FILEARN token is a Solidity ERC-20 contract whose minting operation is
+restricted to the contract owner. Hardhat is used to compile, test, and deploy
+the contract to Ethereum Sepolia, while Wagmi and Viem provide the wallet
+connection layer in the application.
+
+## Application architecture
+
+FiLearn uses Next.js and TypeScript for the application and server routes.
+Auth.js handles credential sessions, with passwords stored as bcrypt hashes.
+Prisma and PostgreSQL store users, connected wallets, module metadata, quiz
+questions, attempts, answers, progress, and reward claims.
+
+Quiz grading and progress updates are written in a database transaction. A
+learner can make multiple attempts while retaining a best score, and completion
+is recorded independently from the client interface.
+
+## Key engineering decisions
+
+### Separate content from progress data
+
+MDX is well suited to authored lesson content, while the relational database is
+better suited to users, attempts, and completion state. Keeping those concerns
+separate makes lessons easy to edit without weakening progress integrity.
+
+### Treat token rewards as a completion receipt
+
+The token is an optional learning incentive, not a financial product. Reward
+eligibility is decided by server-owned progress records, and each completed
+module can only be claimed once.
+
+### Keep blockchain interaction behind validation
+
+The server validates the learner and claim before minting. This avoids exposing
+the owner-only minting operation directly to the browser and keeps a database
+record tied to the on-chain transaction.
+
+## Key tradeoffs
+
+- Testnet tokens provide a real on-chain interaction without carrying monetary
+  value.
+- Credential authentication keeps the prototype focused, while a production
+  platform would benefit from email verification and account recovery.
+- Authored MDX makes lessons version-controlled, but non-technical authors would
+  need a dedicated editing workflow.
+- Blockchain confirmation adds latency and an external dependency to reward
+  claims, so failures must remain retryable without allowing duplicate rewards.
+
+## Outcome
+
+FiLearn demonstrates a complete learning workflow across content authoring,
+authentication, relational progress data, assessment, wallet integration, and
+smart contracts. The project helped me explore where blockchain can add a
+verifiable outcome without making it the center of every application action.
+
+## What I would improve next
+
+- Add more modules and adaptive quiz feedback.
+- Introduce educator-facing content and question management.
+- Add robust transaction reconciliation for delayed or replaced testnet claims.
+- Improve accessibility and keyboard support across interactive lesson content.

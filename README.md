@@ -33,6 +33,9 @@ The portfolio includes the following non-proprietary projects:
 - [Opening Bell](https://github.com/rohitrtk/opening-bell) — A pre-market
   research dashboard that ranks stocks and ETFs using recent financial news and
   market data.
+- [Asset Comparison Tool](https://github.com/rohitrtk/asset-comparison-tool) — A
+  visual tool for comparing the historical returns and risk metrics of stocks,
+  ETFs, and cryptocurrencies.
 - [FiLearn](https://github.com/rohitrtk/fi-learn) — A finance and crypto
   learning platform that rewards completed quizzes with tokens.
 - [Kisto Coin](https://github.com/rohitrtk/kisto-coin) — An account-based,
@@ -49,15 +52,15 @@ links.
 ### Requirements
 
 - Node.js 24
-- npm
+- pnpm
 
 ### Install and run
 
 ```powershell
 git clone https://github.com/rohitrtk/rtk-portfolio3.git
 cd rtk-portfolio3
-npm ci
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Vite serves the frontend at `http://localhost:5173` by default.
@@ -75,14 +78,14 @@ Do not commit `.env` or expose this key to frontend code.
 
 ## Available scripts
 
-| Command                | Purpose                                      |
-| ---------------------- | -------------------------------------------- |
-| `npm run dev`          | Start the Vite development server            |
-| `npm run build`        | Type-check and create the production build   |
-| `npm run lint`         | Run ESLint across the repository             |
-| `npm run format`       | Format supported files with Prettier         |
-| `npm run format:check` | Verify formatting without changing files     |
-| `npm run preview`      | Build and preview the production application |
+| Command                 | Purpose                                      |
+| ----------------------- | -------------------------------------------- |
+| `pnpm run dev`          | Start the Vite development server            |
+| `pnpm run build`        | Type-check and create the production build   |
+| `pnpm run lint`         | Run ESLint across the repository             |
+| `pnpm run format`       | Format supported files with Prettier         |
+| `pnpm run format:check` | Verify formatting without changing files     |
+| `pnpm run preview`      | Build and preview the production application |
 
 ## Project structure
 
@@ -115,11 +118,11 @@ Pull requests and pushes to `main` run the following GitHub Actions checks on
 Node.js 24:
 
 ```powershell
-npm ci
-npm run lint
-npm run format:check
-npm run build
+pnpm ci
+pnpm run lint
+pnpm run format:check
+pnpm run build
 ```
 
-Netlify runs `npm run build`, publishes `dist/`, and deploys functions from
+Netlify runs `pnpm run build`, publishes `dist/`, and deploys functions from
 `netlify/functions/`.
