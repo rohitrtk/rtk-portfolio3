@@ -1,16 +1,20 @@
+import { cn } from '@/lib/utils';
 import { type ReactNode } from 'react';
 
 type Props = {
   children: ReactNode;
   id?: string;
-  verticalPadding?: boolean;
 };
 
-const Section = ({ children, id, verticalPadding = true }: Props) => {
+const Section = ({ children, id }: Props) => {
   return (
     <section
       id={id}
-      className={`min-h-screen flex items-center justify-center px-6 relative overflow-y-visible overflow-x-clip ${verticalPadding ? 'py-32' : ''}`}
+      className={cn(
+        'relative flex min-h-[calc(100svh-4.25rem)] flex-col',
+        'items-center justify-center-safe',
+        'overflow-x-clip px-6 py-8 sm:py-12',
+      )}
     >
       {children}
     </section>

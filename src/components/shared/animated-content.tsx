@@ -1,6 +1,7 @@
 import { motion } from 'motion/react';
 import type { ReactNode } from 'react';
 
+import { useIsMobile } from '@/hooks/use-is-mobile';
 import { cn } from '@/lib/utils';
 
 type AnimatedContentProps = {
@@ -9,16 +10,17 @@ type AnimatedContentProps = {
 };
 
 const AnimatedContent = ({ children, className }: AnimatedContentProps) => {
-  // const isMobile = useIsMobile();
+  const isMobile = useIsMobile();
 
   const classes = cn(
     'relative z-10 mx-auto w-full min-w-0 max-w-6xl',
     className,
   );
 
-  // if (isMobile) {
-  //   return <div className={classes}>{children}</div>;
-  // }
+  // Disable animations on mobile devices
+  if (isMobile) {
+    return <div className={classes}>{children}</div>;
+  }
 
   return (
     <motion.div

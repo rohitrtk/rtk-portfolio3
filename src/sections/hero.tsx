@@ -8,7 +8,7 @@ import { scrollToSection } from '@/util';
 
 const Hero = () => {
   return (
-    <Section id="hero" verticalPadding={false}>
+    <Section id="hero">
       <AnimatedContent className="section-card">
         <div className="mb-8">
           <h1 className="ml-[-0.04em] text-6xl tracking-tighter text-foreground md:text-7xl lg:text-8xl">
