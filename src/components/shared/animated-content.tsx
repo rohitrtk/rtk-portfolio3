@@ -31,7 +31,7 @@ const AnimatedContent = ({ children, className }: AnimatedContentProps) => {
       }}
       viewport={{
         once: true,
-        margin: '-200px',
+        margin: '-100px',
         amount: 'some',
       }}
     >
