@@ -7,15 +7,23 @@ import Section from '@/components/shared/section';
 import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import { projects } from '@/data/projects';
-import { cn } from '@/lib/utils';
 import type { Project } from '@/types/project';
 import { saveRouteScrollPosition } from '@/util/route-scroll';
+import { motion, useScroll, useTransform } from 'motion/react';
+import { useRef } from 'react';
 
 const Projects = () => {
   const { key: locationKey } = useLocation();
 
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ['start end', 'end start'],
+  });
+  const scale = useTransform(scrollYProgress, [0, 0.5], [1, 1.15]);
+
   return (
-    <Section id="projects">
+    <Section id="projects" ref={containerRef}>
       <AnimatedContent className="section-card">
         <h2 className="mb-6 text-4xl tracking-tight md:text-5xl">Projects</h2>
         <Separator className="mb-6" />
@@ -27,21 +35,14 @@ const Projects = () => {
               className="group flex flex-col overflow-hidden border border-border bg-background transition-[border-color,box-shadow] hover:border-primary/60 hover:shadow-lg hover:shadow-primary/5"
             >
               {project.coverImage && (
-                <div className="aspect-[16/10] w-full overflow-hidden border-b bg-muted/40">
-                  <img
+                <div className="aspect-16/10 w-full overflow-hidden border-b bg-muted/40">
+                  <motion.img
+                    style={{ scale }}
                     src={project.coverImage.src}
                     alt={project.coverImage.alt}
                     loading="lazy"
                     decoding="async"
-                    className={cn(
-                      'h-full w-full transition-transform duration-500 group-hover:scale-[1.02]',
-                      project.coverImage.fit === 'contain'
-                        ? 'object-contain p-4'
-                        : 'object-cover',
-                    )}
-                    style={{
-                      objectPosition: project.coverImage.position,
-                    }}
+                    className="h-full w-full object-cover"
                   />
                 </div>
               )}
