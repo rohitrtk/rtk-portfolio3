@@ -9,8 +9,8 @@ export const projects = [
     tags: ['react', 'typescript', 'tailwind', 'python', 'fastapi', 'sqlite'],
     link: 'https://github.com/rohitrtk/maple-room',
     coverImage: {
-      src: '/projects/maple-room/maple-room-1.webp',
-      alt: 'MapleRoom TFSA dashboard with estimated contribution room and annual summaries',
+      src: '/projects/maple-room/maple-room-cover.webp',
+      alt: 'MapleRoom TFSA planner dashboard displayed in a desktop app window',
       position: 'top',
     },
     images: [
@@ -78,8 +78,8 @@ export const projects = [
     tags: ['react', 'typescript', 'tailwind', 'python', 'fastapi'],
     link: 'https://github.com/rohitrtk/opening-bell',
     coverImage: {
-      src: '/projects/opening-bell/opening-bell-1.webp',
-      alt: 'Opening Bell morning brief dashboard with market news tone and ranked watchlist',
+      src: '/projects/opening-bell/opening-bell-cover.webp',
+      alt: 'Opening Bell market research dashboard displayed on an ultrawide monitor at dawn',
       position: 'top',
     },
     images: [
@@ -124,8 +124,8 @@ export const projects = [
     link: 'https://github.com/rohitrtk/asset-comparison-tool',
     liveLink: 'https://asset-comparison-tool.streamlit.app/',
     coverImage: {
-      src: '/projects/asset-comparison-tool/asset-comparison-tool-1.webp',
-      alt: 'Asset comparison tool displaying a list of assets, their returns, and other metrics',
+      src: '/projects/asset-comparison-tool/asset-comparison-tool-cover.webp',
+      alt: 'Asset Comparison Tool dashboard presented as a layered financial analysis workspace',
       position: 'top',
     },
     images: [
@@ -163,8 +163,8 @@ export const projects = [
     tags: ['nextjs', 'typescript', 'solidity', 'tailwind', 'prisma', 'hardhat'],
     link: 'https://github.com/rohitrtk/fi-learn',
     coverImage: {
-      src: '/projects/fi-learn/fi-learn-1.webp',
-      alt: 'FiLearn welcome screen',
+      src: '/projects/fi-learn/fi-learn-cover.webp',
+      alt: 'FiLearn finance learning platform displayed on a tablet',
       position: 'top',
     },
     images: [
@@ -216,8 +216,8 @@ export const projects = [
     tags: ['react', 'typescript', 'tailwind', 'java', 'spring'],
     link: 'https://github.com/rohitrtk/kisto-coin',
     coverImage: {
-      src: '/projects/kisto-coin/kisto-coin-1.webp',
-      alt: 'Kisto Coin wallets dashboard',
+      src: '/projects/kisto-coin/kisto-coin-cover.webp',
+      alt: 'Kisto Coin wallet dashboard presented as a neon blockchain console',
       position: 'top',
     },
     images: [
@@ -264,6 +264,32 @@ export const projects = [
         alt: 'Kisto Coin block inspector',
         caption:
           'The individual block inspector displays the transactions and metadata contained in a block.',
+      },
+    ],
+  },
+  {
+    slug: 'mini-link',
+    title: 'Mini Link',
+    description:
+      'A lightweight URL shortener that turns long links into compact, shareable 12-character Base62 codes backed by a Dockerized PostgreSQL database.',
+    tags: ['python', 'fastapi', 'postgresql', 'docker'],
+    link: 'https://github.com/rohitrtk/mini-link',
+    coverImage: {
+      src: '/projects/mini-link/mini-link-cover.webp',
+      alt: 'Mini Link URL shortener displayed on a bright product card with a looping green ribbon',
+      position: 'top',
+    },
+    images: [
+      {
+        src: '/projects/mini-link/mini-link-1.webp',
+        alt: 'Mini Link URL-shortening form',
+        caption:
+          'The focused interface accepts a long URL without requiring an account.',
+      },
+      {
+        src: '/projects/mini-link/mini-link-2.webp',
+        alt: 'Mini Link generated short URL result',
+        caption: 'A generated short link can be opened or copied immediately.',
       },
     ],
   },

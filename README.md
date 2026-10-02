@@ -40,89 +40,11 @@ The portfolio includes the following non-proprietary projects:
   learning platform that rewards completed quizzes with tokens.
 - [Kisto Coin](https://github.com/rohitrtk/kisto-coin) — An account-based,
   proof-of-work blockchain with wallet and transfer functionality.
+- [Mini Link](https://github.com/rohitrtk/mini-link) — A lightweight URL
+  shortener backed by FastAPI and PostgreSQL.
 - [Instagram 4 Pomeranians](https://github.com/rohitrtk/pomstagram) — An
   Instagram-style application that uses image recognition to allow only
   Pomeranian photos.
 
 Selected proprietary projects are described on the portfolio without source
 links.
-
-## Getting started
-
-### Requirements
-
-- Node.js 24
-- pnpm
-
-### Install and run
-
-```powershell
-git clone https://github.com/rohitrtk/rtk-portfolio3.git
-cd rtk-portfolio3
-pnpm install
-pnpm run dev
-```
-
-Vite serves the frontend at `http://localhost:5173` by default.
-
-The contact endpoint is a Netlify Function. To exercise it locally, install the
-[Netlify CLI](https://docs.netlify.com/api-and-cli-guides/cli-guides/get-started-with-cli/)
-and run `netlify dev` from the repository root. Add the following variable to a
-local `.env` file or the Netlify environment:
-
-```dotenv
-RESEND_API_KEY=your_resend_api_key
-```
-
-Do not commit `.env` or expose this key to frontend code.
-
-## Available scripts
-
-| Command                 | Purpose                                      |
-| ----------------------- | -------------------------------------------- |
-| `pnpm run dev`          | Start the Vite development server            |
-| `pnpm run build`        | Type-check and create the production build   |
-| `pnpm run lint`         | Run ESLint across the repository             |
-| `pnpm run format`       | Format supported files with Prettier         |
-| `pnpm run format:check` | Verify formatting without changing files     |
-| `pnpm run preview`      | Build and preview the production application |
-
-## Project structure
-
-```text
-.
-|-- public/
-|   `-- projects/             # Portfolio screenshots
-|-- src/
-|   |-- components/           # Shared components and UI primitives
-|   |-- context/              # Theme state and persistence
-|   |-- data/                 # Project metadata
-|   |-- hooks/                # Responsive hooks
-|   |-- sections/             # Page sections
-|   |-- styles/               # Tailwind theme and global styles
-|   |-- types/                # Shared TypeScript types
-|   `-- util/                 # Icon registry and navigation helpers
-|-- netlify/
-|   `-- functions/            # Contact-form serverless function
-|-- .github/workflows/        # Continuous integration
-|-- netlify.toml              # Hosting and local development configuration
-`-- vite.config.ts            # Vite, React, Tailwind, and alias configuration
-```
-
-Project cards are defined in `src/data/projects.ts`. Gallery images live under
-`public/projects/<project-slug>/` and are referenced with root-relative URLs.
-
-## Validation and deployment
-
-Pull requests and pushes to `main` run the following GitHub Actions checks on
-Node.js 24:
-
-```powershell
-pnpm ci
-pnpm run lint
-pnpm run format:check
-pnpm run build
-```
-
-Netlify runs `pnpm run build`, publishes `dist/`, and deploys functions from
-`netlify/functions/`.
