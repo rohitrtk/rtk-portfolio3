@@ -1,0 +1,39 @@
+## Overview
+
+Mini Link is a small URL-shortening service built with FastAPI and PostgreSQL.
+It provides a focused browser interface for creating compact links and redirects
+each short link to its original destination.
+
+![Mini Link URL-shortening form](/projects/mini-link/mini-link-1.webp)
+
+_A long URL can be shortened without creating an account._
+
+## How it works
+
+When a URL is submitted, Mini Link generates a cryptographically secure,
+12-character Base62 code. PostgreSQL stores the code and destination behind
+unique constraints, while collision handling retries with a new value when
+necessary.
+
+Submitting an existing destination returns its current short code and records
+the additional creation. Visiting a short URL performs a temporary redirect to
+the stored destination.
+
+![Mini Link result showing a generated short URL](/projects/mini-link/mini-link-2.webp)
+
+_Generated links are ready to copy or open immediately._
+
+## Technical approach
+
+FastAPI serves both the API and a Jinja2 page enhanced with vanilla JavaScript.
+SQLAlchemy and asyncpg provide asynchronous PostgreSQL access, Alembic manages
+schema changes, and Docker Compose runs the application and database locally.
+
+The project keeps the public code separate from the database ID and includes
+tests for Base62 encoding, decoding, and code generation.
+
+## Outcome
+
+Mini Link turns the core URL-shortener design into a small working service with
+durable storage, collision handling, redirects, and a straightforward user
+interface.
